@@ -11,34 +11,29 @@ auto MSol::Clone(Node *root) -> Node * {
 
   LOG(INFO) << "Begin: " << root;
   
-  auto r = root;
-  while (r != nullptr) {
-    
+  for (auto r = root; r != nullptr; r = r->next->next) {
     auto cr = new Node();
     cr->value = r->value + 10;
     cr->next = r->next;
     r->next = cr;
-    r = r->next->next;
   }
   LOG(INFO) << "Phase 1: " << root;
 
-  r = root;
-  while (r != nullptr) {
-    r->next->afriend = r->afriend->next;
-    r = r->next->next;
+  for (auto r = root; r != nullptr; r = r->next->next) {
+    if (r->afriend != nullptr) {
+      r->next->afriend = r->afriend->next;
+    }
   }
   LOG(INFO) << "Phase 2: " << root;
 
   auto croot = root->next;
   auto ctmp = croot;
-  r = root;
 
-  while (ctmp->next != nullptr) {
+  for (auto r = root; ctmp->next != nullptr; r = r->next->next, ctmp = ctmp->next) {
     r->next = ctmp->next;
     ctmp->next = ctmp->next->next;
-    r = r->next;
-    ctmp = ctmp->next;
   }
+
   LOG(INFO) << "root: " << root;
   LOG(INFO) << "croot: " << croot;
   return croot;
