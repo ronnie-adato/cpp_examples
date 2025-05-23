@@ -8,31 +8,40 @@ auto MSol::Clone(Node *root) -> Node * {
     LOG(ERROR) << "Error: root is nullptr";
     return nullptr;
   }
+
   LOG(INFO) << "Begin: " << root;
 
-  Node *cr = nullptr;
-  for (Node *r = root; r != nullptr; r->next = cr, r = cr->next) {
-    cr = new Node();
+  auto r = root;
+  while (r != nullptr) {
+
+    auto cr = new Node();
     cr->value = r->value + 10;
     cr->next = r->next;
+    r->next = cr;
+    r = r->next->next;
   }
   LOG(INFO) << "Phase 1: " << root;
 
-  for (Node *r = root; r != nullptr; r = r->next->next) {
+  r = root;
+  while (r != nullptr) {
     r->next->afriend = r->afriend->next;
+    r = r->next->next;
   }
   LOG(INFO) << "Phase 2: " << root;
 
-  Node *croot = root->next;
-
-  for (Node *r = root, *ctmp = croot; r != nullptr;
-       r = r->next, ctmp = ctmp->next) {
+  auto croot = root->next;
+  auto ctmp = croot;
+  r = root;
+  
+  while (ctmp->next != nullptr) {
     r->next = ctmp->next;
-    if (ctmp->next != nullptr) {
-      ctmp->next = ctmp->next->next;
-    }
+    ctmp->next = ctmp->next->next;
+    r = r->next;
+    ctmp = ctmp->next;
   }
-
+  r->next = nullptr;
+  
+  LOG(INFO) << "Phase 3:";
   LOG(INFO) << "root: " << root;
   LOG(INFO) << "croot: " << croot;
   return croot;
