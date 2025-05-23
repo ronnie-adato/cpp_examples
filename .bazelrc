@@ -1,0 +1,6 @@
+build:clang-tidy --action_env=BAZEL_USE_CLANG_TIDY=1
+build --verbose_failures
+build --sandbox_debug
+build --subcommands
+
+

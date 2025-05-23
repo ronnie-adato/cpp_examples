@@ -1,0 +1,24 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+exports_files(["COPYING"])
+
+cc_library(
+    name = "tests-friendly-ll",
+    hdrs = glob(["include/*.hpp"]),
+    strip_include_prefix = "include",
+    srcs = [
+        "src/list_utils.cc",
+        "src/rsol.t.cc",
+        "src/msol.t.cc",
+    ],
+    deps = [
+        "//friendly-ll:friendly-ll",
+        "@googletest//:gtest_main",
+        "@ng-log//:ng-log",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+
