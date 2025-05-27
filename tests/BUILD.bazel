@@ -20,10 +20,11 @@ cc_test(
         "gtest_main.cc",
     ],
     deps = [
-        "//friendly-ll:friendly-ll",
-        "//friendly-ll/tests:tests-friendly-ll",
         "@googletest//:gtest_main",
         "@ng-log//:ng-log",
-        # ":test_headers",
+        "//friendly-ll:friendly-ll",
+        "//friendly-ll/tests:tests-friendly-ll",
+        "//ranges:ranges",
+        "//ranges/tests:tests-ranges",
     ],
 )

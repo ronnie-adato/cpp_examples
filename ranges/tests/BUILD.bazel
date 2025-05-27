@@ -1,0 +1,21 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+exports_files(["COPYING"])
+
+cc_library(
+    name = "tests-ranges",
+    hdrs = glob(["include/*.hpp"], allow_empty = True,),
+    strip_include_prefix = "include",
+    srcs = [
+    ],
+    deps = [
+        "//ranges:ranges",
+        "@googletest//:gtest_main",
+        "@ng-log//:ng-log",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+
