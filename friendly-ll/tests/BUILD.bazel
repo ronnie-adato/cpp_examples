@@ -9,9 +9,8 @@ cc_library(
     hdrs = glob(["include/*.hpp"]),
     strip_include_prefix = "include",
     srcs = [
-        "src/list_utils.cc",
-        "src/rsol.t.cc",
-        "src/msol.t.cc",
+        "src/list_utils.cpp",
+        "src/clone_solution_typed_test.cpp",
     ],
     deps = [
         "//friendly-ll:friendly-ll",
