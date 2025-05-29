@@ -1,8 +1,17 @@
 #include "ranges_generic_test.hpp"
 #include "rranges.hpp"
 
+#include <ng-log/logging.h>
+
+// Add other implementations here if needed
+typedef ::testing::Types<RRanges> RangeImplementations;
+
+TYPED_TEST_SUITE(RangesTypedTest, RangeImplementations);
+
+
 TYPED_TEST(RangesTypedTest, AddAndQuerySimpleRange) {
     this->rr->add_range(1, 5);
+    // LOG(INFO) << *this->rr;
     EXPECT_TRUE(this->rr->query_range(1, 5));
     EXPECT_FALSE(this->rr->query_range(0, 1));
     EXPECT_FALSE(this->rr->query_range(5, 6));
