@@ -7,7 +7,8 @@
 cc_library(
     name = "ranges",
     srcs = [
-        # "src/rranges.cpp",
+        "src/ranges.cpp",
+        "src/rranges.cpp",
     ],
     hdrs = glob(["include/*.hpp"]),
     includes = [
