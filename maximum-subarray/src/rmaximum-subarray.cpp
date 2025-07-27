@@ -1,10 +1,7 @@
 
 #include <ng-log/logging.h>
 #include <cstddef>
-#include <iterator>
-#include <numeric>
 #include <ostream>
-#include <sstream>
 #include <vector>
 
 std::ostream &operator<<(std::ostream &os, const std::vector<int> &v)
@@ -27,25 +24,6 @@ std::ostream &operator<<(std::ostream &os, const std::vector<int> &v)
     return os;
 }
 
-// int find_where_to_end(const std::vector<int> &nums)
-// {
-//     std::vector<int> sums(nums);
-//     LOG(INFO) << "sums: " << sums;
-//     int max_sum = sums.front();
-//     int index = 0;
-//     for (auto prev_it = sums.begin(), it = std::next(prev_it); it != sums.end(); prev_it = it, ++it)
-//     {
-//         *it += *prev_it;
-//         if (max_sum < *it)
-//         {
-//             max_sum = *it;
-//             index = std::distance(sums.begin(), it);
-//         }
-//     }
-//     LOG(INFO) << "index: " << index << " max_sum: " << max_sum << " sums: " << sums;
-//     return index;
-// }
-
 int maxSubArray(const std::vector<int> &nums)
 {
     LOG(INFO) << "nums: " << nums;
@@ -54,11 +32,6 @@ int maxSubArray(const std::vector<int> &nums)
         LOG(INFO) << "Input is empty. Returning 0.";
         return 0;  // or throw an exception, depending on the desired behavior
     }
-
-    // int left_index = find_where_to_end(nums);
-    // int right_index = nums.size() - find_where_to_end(std::vector<int>(nums.rbegin(), nums.rend()));
-    // int max_sum = std::accumulate(std::next(nums.begin(), left_index + 1), std::next(nums.begin(), right_index),
-    //                               *std::next(nums.begin(), left_index));
 
     std::vector<int> sums(nums.crbegin(), nums.crend());
 
