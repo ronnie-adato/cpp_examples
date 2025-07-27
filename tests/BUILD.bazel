@@ -4,14 +4,6 @@ licenses(["notice"])
 
 exports_files(["COPYING"])
 
-# cc_library(
-#     name = "test_headers",
-#     hdrs = glob(["include/*.hpp"]),
-#     strip_include_prefix = "include",
-#     visibility = ["//visibility:public"],
-# )
-
-
 cc_test(
     name = "tests-cpp-examples",
     includes = [
@@ -26,5 +18,7 @@ cc_test(
         "//friendly-ll/tests:tests-friendly-ll",
         "//ranges:ranges",
         "//ranges/tests:tests-ranges",
+        "//maximum-subarray:maximum-subarray",
+        "//maximum-subarray/tests:tests-maximum-subarray",
     ],
 )

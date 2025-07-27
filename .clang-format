@@ -1,0 +1,9 @@
+{
+  "BasedOnStyle": "Google",
+  "IndentWidth": 4,
+  "ColumnLimit": 120,
+  "SortIncludes": true,
+  "IncludeBlocks": "Preserve",
+  "AllowShortFunctionsOnASingleLine": "Empty",
+  "BreakBeforeBraces": "Allman"
+}
