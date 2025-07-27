@@ -4,14 +4,6 @@ licenses(["notice"])
 
 exports_files(["COPYING"])
 
-# cc_library(
-#     name = "test_headers",
-#     hdrs = glob(["include/*.hpp"]),
-#     strip_include_prefix = "include",
-#     visibility = ["//visibility:public"],
-# )
-
-
 cc_test(
     name = "tests-cpp-examples",
     includes = [
