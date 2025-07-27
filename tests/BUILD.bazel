@@ -26,5 +26,7 @@ cc_test(
         "//friendly-ll/tests:tests-friendly-ll",
         "//ranges:ranges",
         "//ranges/tests:tests-ranges",
+        "//maximum-subarray:maximum-subarray",
+        "//maximum-subarray/tests:tests-maximum-subarray",
     ],
 )
