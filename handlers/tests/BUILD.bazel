@@ -1,0 +1,22 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+exports_files(["COPYING"])
+
+cc_library(
+    name = "tests-handlers",
+    hdrs = glob(["include/*.hpp"], allow_empty=True),
+    strip_include_prefix = "include",
+    srcs = [
+        "src/handlers_generic_test.cpp",
+    ],
+    deps = [
+        "//handlers:handlers",
+        "@googletest//:gtest_main",
+        "@ng-log//:ng-log",
+    ],
+    visibility = ["//visibility:public"],
+)
+
+
