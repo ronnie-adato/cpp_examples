@@ -20,5 +20,7 @@ cc_test(
         "//ranges/tests:tests-ranges",
         "//maximum-subarray:maximum-subarray",
         "//maximum-subarray/tests:tests-maximum-subarray",
+        "//handlers:handlers",
+        "//handlers/tests:tests-handlers",
     ],
 )
