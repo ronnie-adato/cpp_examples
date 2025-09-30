@@ -24,5 +24,7 @@ cc_test(
         "//handlers/tests:tests-handlers",
         "//fibonacci:fibonacci",
         "//fibonacci/tests:tests-fibonacci",
+        "//lru_cache:lru_cache",
+        "//lru_cache/tests:tests-lru_cache",
     ],
 )
