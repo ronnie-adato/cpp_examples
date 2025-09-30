@@ -22,5 +22,7 @@ cc_test(
         "//maximum-subarray/tests:tests-maximum-subarray",
         "//handlers:handlers",
         "//handlers/tests:tests-handlers",
+        "//fibonacci:fibonacci",
+        "//fibonacci/tests:tests-fibonacci",
     ],
 )
