@@ -4,15 +4,11 @@ licenses(["notice"])
 
 exports_files(["COPYING"])
 
-cc_test(
+cc_library(
     name = "tests-cpp-examples",
-    includes = [
-        ],
-    srcs = [
-        "gtest_main.cc",
-    ],
+    includes = [],
+    srcs = ["gtest_main.cc"],
     deps = [
-        "@googletest//:gtest_main",
         "@ng-log//:ng-log",
         "//utils:utils",
         "//utils/tests:tests-utils",
