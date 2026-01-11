@@ -24,6 +24,8 @@ cc_test(
         "//handlers/tests:tests-handlers",
         "//fibonacci:fibonacci",
         "//fibonacci/tests:tests-fibonacci",
+        "//largest_square:largest_square",
+        "//largest_square/tests:tests-largest_square",
         "//lru_cache:lru_cache",
         "//lru_cache/tests:tests-lru_cache",
     ],
