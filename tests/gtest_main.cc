@@ -28,7 +28,6 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "ng-log/logging.h"
-#include <cstdio>
 #include <gtest/gtest.h>
 #include <iomanip>
 #include <iostream>
