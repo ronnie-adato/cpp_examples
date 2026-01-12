@@ -1,6 +1,6 @@
 # Rotting Oranges (LeetCode 994)
 
-LeetCode: https://leetcode.com/problems/rotting-oranges/
+LeetCode: <https://leetcode.com/problems/rotting-oranges/>
 
 ## Task
 
