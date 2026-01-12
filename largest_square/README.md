@@ -2,11 +2,14 @@
 
 ## Task
 
-Given a 2D matrix of integers, compute the side-length of the largest axis-aligned square sub-matrix whose cells are all non-zero.
+Given a 2D matrix of integers, compute the side-length of the largest axis-aligned square
+sub-matrix whose cells are all non-zero.
 
 ## API
 
-- `unsigned largest_square(const std::vector<std::vector<int>>& matrix);`
+```cpp
+unsigned largest_square(const std::vector<std::vector<int>>& matrix);
+```
 
 The input matrix is treated as binary (any non-zero value counts as `1`).
 

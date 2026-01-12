@@ -12,5 +12,6 @@ struct Node {
 
 ```
 
-`afriend` may point to any other node in the list or be null. Friendship doesn’t have to be mutual (i.e. a node pointed to by a friend pointer of another node, doesn’t have to point back).
+`afriend` may point to any other node in the list or be null. Friendship doesn’t have to be mutual
+(i.e. a node pointed to by a friend pointer of another node, doesn’t have to point back).
 Implement a clone function for such a list.

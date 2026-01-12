@@ -1,5 +1,7 @@
 # Compilations
 
+[![CI](https://github.com/ronnie-adato/cpp_examples/actions/workflows/ci.yml/badge.svg?branch=master)](https://github.com/ronnie-adato/cpp_examples/actions/workflows/ci.yml)
+
 If you don't have `bazel` download and install it  [Bazel Introduction](https://bazel.build/about/intro)
 
 ## Linting

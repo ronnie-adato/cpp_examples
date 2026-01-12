@@ -1,0 +1,16 @@
+# markdownlint-cli2 configuration
+# https://github.com/DavidAnson/markdownlint-cli2
+
+config:
+  # Keep markdownlint enabled, but relax line length to reduce churn.
+  MD013:
+    line_length: 120
+
+# Ignore vendored / generated content.
+ignores:
+  - "external/**"
+  - "bazel-*/**"
+  - "bazel-bin/**"
+  - "bazel-out/**"
+  - "bazel-testlogs/**"
+  - "node_modules/**"

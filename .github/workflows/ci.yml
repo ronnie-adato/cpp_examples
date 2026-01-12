@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  bazel:
+    name: Bazel build & test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: C++ format check (clang-format)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-format
+          git ls-files '*.cpp' '*.hpp' | xargs -r clang-format -n --Werror
+
+      - name: Markdown format check (markdownlint)
+        uses: DavidAnson/markdownlint-cli2-action@v16
+        with:
+          config: .markdownlint-cli2.yaml
+          globs: |
+            **/*.md
+            **/*.MD
+
+      - name: Set up Bazel
+        uses: bazelbuild/setup-bazelisk@v3
+        with:
+          bazelisk-version: "1.20.0"
+
+      - name: Bazel info
+        run: |
+          bazel version
+          bazel info
+
+      - name: Build
+        run: bazel build //...
+
+      - name: Lint (clang-tidy)
+        run: bazel build --config=clang-tidy //...
+
+      - name: Test
+        run: bazel test //tests:tests-cpp-examples --test_output=errors
