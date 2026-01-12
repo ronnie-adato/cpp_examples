@@ -30,12 +30,9 @@ jobs:
             **/*.MD
 
       - name: Set up Bazel
-        uses: bazel-contrib/setup-bazel@v0.9.0
+        uses: bazelbuild/setup-bazelisk@v3
         with:
           bazelisk-version: "1.20.0"
-          # Enables sharing Bazel downloads / build outputs across CI runs.
-          disk-cache: true
-          repository-cache: true
 
       - name: Bazel info
         run: |
