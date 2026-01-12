@@ -1,0 +1,20 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+exports_files(["COPYING"])
+
+cc_library(
+    name = "tests-rotting_oranges",
+    hdrs = glob(["include/*.hpp"], allow_empty=True),
+    strip_include_prefix = "include",
+    srcs = [
+        "src/rotting_oranges_generic_test.cpp",
+    ],
+    deps = [
+        "//rotting-oranges:rotting_oranges",
+        "@googletest//:gtest_main",
+        "@ng-log//:ng-log",
+    ],
+    visibility = ["//visibility:public"],
+)
