@@ -28,5 +28,7 @@ cc_test(
         "//largest_square/tests:tests-largest_square",
         "//lru_cache:lru_cache",
         "//lru_cache/tests:tests-lru_cache",
+        "//rotting-oranges:rotting_oranges",
+        "//rotting-oranges/tests:tests-rotting_oranges",
     ],
 )
