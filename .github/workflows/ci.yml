@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  bazel:
+    name: Bazel build & test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: C++ format check (clang-format)
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang-format
+          git ls-files '*.cpp' '*.hpp' | xargs -r clang-format -n --Werror
+
+      - name: Markdown format check (markdownlint)
+        uses: DavidAnson/markdownlint-cli2-action@v16
+        with:
+          globs: |
+            **/*.md
+            **/*.MD
+
+      - name: Set up Bazel
+        uses: bazel-contrib/setup-bazel@v0.9.0
+        with:
+          bazelisk-version: "1.20.0"
+          # Enables sharing Bazel downloads / build outputs across CI runs.
+          disk-cache: true
+          repository-cache: true
+
+      - name: Bazel info
+        run: |
+          bazel version
+          bazel info
+
+      - name: Build
+        run: bazel build //...
+
+      - name: Lint (clang-tidy)
+        run: bazel build --config=clang-tidy //...
+
+      - name: Test
+        run: bazel test //tests:tests-cpp-examples --test_output=errors
