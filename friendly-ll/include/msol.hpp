@@ -2,7 +2,8 @@
 
 #include "solution.hpp"
 
-class MSol : public Solution {
-public:
-  Node *Clone(Node *root) override;
+class MSol : public Solution
+{
+   public:
+    Node *Clone(Node *root) override;
 };

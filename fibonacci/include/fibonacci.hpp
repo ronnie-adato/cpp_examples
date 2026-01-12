@@ -2,10 +2,12 @@
 
 #include <vector>
 
-class Fibonacci {
-public:
+class Fibonacci
+{
+   public:
     int compute(int n);
-private:
+
+   private:
     void fib_compute(int n);
     std::vector<int> memo;
 };

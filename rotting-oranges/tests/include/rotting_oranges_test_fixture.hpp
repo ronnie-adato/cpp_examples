@@ -2,4 +2,6 @@
 
 #include <gtest/gtest.h>
 
-struct RottingOrangesTestFixture : public ::testing::Test {};
+struct RottingOrangesTestFixture : public ::testing::Test
+{
+};

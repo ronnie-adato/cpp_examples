@@ -2,10 +2,11 @@
 
 #include <ostream>
 
-struct Node {
-  int value;
-  Node *next = nullptr;
-  Node *afriend = nullptr;
+struct Node
+{
+    int value;
+    Node *next = nullptr;
+    Node *afriend = nullptr;
 };
 
 auto operator<<(std::ostream &os, const Node &node) -> std::ostream &;
