@@ -6,7 +6,6 @@
 #include <cstddef>
 #include <memory>
 #include <random>
-#include <utility>
 #include <vector>
 
 namespace
