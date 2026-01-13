@@ -27,11 +27,14 @@ auto level_order_reference_dfs(TreeNode* root) -> std::vector<std::vector<int>>
 {
     std::vector<std::vector<int>> levels;
 
-    const auto dfs = [&](auto&& self, TreeNode* node, std::size_t depth) -> void {
-        if (node == nullptr) {
+    const auto dfs = [&](auto&& self, TreeNode* node, std::size_t depth) -> void
+    {
+        if (node == nullptr)
+        {
             return;
         }
-        if (levels.size() == depth) {
+        if (levels.size() == depth)
+        {
             levels.push_back({});
         }
         levels[depth].push_back(node->val);
@@ -47,9 +50,11 @@ auto make_left_chain(TreeArena& arena, const std::vector<int>& values) -> TreeNo
 {
     TreeNode* root = nullptr;
     TreeNode* current = nullptr;
-    for (int value : values) {
+    for (int value : values)
+    {
         TreeNode* node = arena.make(value);
-        if (root == nullptr) {
+        if (root == nullptr)
+        {
             root = node;
             current = node;
             continue;
@@ -64,9 +69,11 @@ auto make_right_chain(TreeArena& arena, const std::vector<int>& values) -> TreeN
 {
     TreeNode* root = nullptr;
     TreeNode* current = nullptr;
-    for (int value : values) {
+    for (int value : values)
+    {
         TreeNode* node = arena.make(value);
-        if (root == nullptr) {
+        if (root == nullptr)
+        {
             root = node;
             current = node;
             continue;
@@ -79,7 +86,8 @@ auto make_right_chain(TreeArena& arena, const std::vector<int>& values) -> TreeN
 
 auto make_random_tree(TreeArena& arena, std::size_t node_count, std::mt19937& rng) -> TreeNode*
 {
-    if (node_count == 0) {
+    if (node_count == 0)
+    {
         return nullptr;
     }
 
@@ -90,20 +98,27 @@ auto make_random_tree(TreeArena& arena, std::size_t node_count, std::mt19937& rn
     std::vector<TreeNode*> created;
     created.push_back(root);
 
-    for (std::size_t i = 1; i < node_count; ++i) {
+    for (std::size_t i = 1; i < node_count; ++i)
+    {
         TreeNode* new_node = arena.make(value_dist(rng));
 
         std::uniform_int_distribution<std::size_t> parent_dist(0, created.size() - 1);
-        while (true) {
+        while (true)
+        {
             TreeNode* parent = created[parent_dist(rng)];
             const bool attach_left = (side_dist(rng) == 0);
-            if (attach_left) {
-                if (parent->left == nullptr) {
+            if (attach_left)
+            {
+                if (parent->left == nullptr)
+                {
                     parent->left = new_node;
                     break;
                 }
-            } else {
-                if (parent->right == nullptr) {
+            }
+            else
+            {
+                if (parent->right == nullptr)
+                {
                     parent->right = new_node;
                     break;
                 }
@@ -116,7 +131,7 @@ auto make_random_tree(TreeArena& arena, std::size_t node_count, std::mt19937& rn
     return root;
 }
 
-} // namespace
+}  // namespace
 
 TEST(LevelOrderTraversal, NullRoot)
 {
@@ -187,7 +202,8 @@ TEST(LevelOrderTraversal, RandomizedMatchesReference)
     std::mt19937 rng(1234567);
     std::uniform_int_distribution<std::size_t> size_dist(0, 50);
 
-    for (int iter = 0; iter < 200; ++iter) {
+    for (int iter = 0; iter < 200; ++iter)
+    {
         TreeArena arena;
         TreeNode* root = make_random_tree(arena, size_dist(rng), rng);
 
