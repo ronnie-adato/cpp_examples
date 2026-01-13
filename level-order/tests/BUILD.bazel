@@ -1,0 +1,19 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+exports_files(["COPYING"])
+
+cc_library(
+    name = "tests-level_order",
+    hdrs = glob(["include/*.hpp"], allow_empty = True),
+    strip_include_prefix = "include",
+    srcs = [
+        "src/level_order_generic_test.cpp",
+    ],
+    deps = [
+        "//level-order:level_order",
+        "@googletest//:gtest_main",
+    ],
+    visibility = ["//visibility:public"],
+)
