@@ -1,0 +1,18 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+cc_library(
+    name = "tests-lca",
+    hdrs = glob(["include/*.hpp"], allow_empty = True),
+    strip_include_prefix = "include",
+    srcs = [
+        "src/lca_test_fixture.cpp",
+        "src/lca_generic_test.cpp",
+    ],
+    deps = [
+        "//lca:lca",
+        "@googletest//:gtest_main",
+    ],
+    visibility = ["//visibility:public"],
+)
