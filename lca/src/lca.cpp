@@ -32,11 +32,6 @@ constexpr auto operator&=(State& lhs, State rhs) noexcept -> State&
     return lhs;
 }
 
-constexpr auto has_flag(State value, State flag) noexcept -> bool
-{
-    return (value & flag) == flag;
-}
-
 auto lowest_common_ancestor(TreeNode* root, TreeNode* p, TreeNode* q, State& state) -> TreeNode*
 {
     if (root == p) {
