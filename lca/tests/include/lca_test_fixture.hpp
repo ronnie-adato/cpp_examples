@@ -10,7 +10,7 @@ struct TreeNode;
 
 struct LeastCommonAncestorTestFixture : public ::testing::Test
 {
-protected:
+   protected:
     struct OwnedTree
     {
         TreeNode* make(int value);
