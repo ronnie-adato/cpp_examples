@@ -1,5 +1,5 @@
-#include "tree_node.hpp"
 #include "lca_test_fixture.hpp"
+#include "tree_node.hpp"
 
 TreeNode* LeastCommonAncestorTestFixture::OwnedTree::make(int value)
 {
