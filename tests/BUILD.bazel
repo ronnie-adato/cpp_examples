@@ -16,6 +16,8 @@ cc_test(
         "@ng-log//:ng-log",
         "//level-order:level_order",
         "//level-order/tests:tests-level_order",
+        "//lca:lca",
+        "//lca/tests:tests-lca",
         "//friendly-ll:friendly-ll",
         "//friendly-ll/tests:tests-friendly-ll",
         "//ranges:ranges",
