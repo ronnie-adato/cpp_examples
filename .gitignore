@@ -33,6 +33,9 @@ x64-Release/
 cmake-variants.yaml
 compile_commands.json
 
+# Local tooling cache (used by tools/ci.sh)
+.tools/
+
 # Ignore autoconf / automake files
 Makefile.in
 aclocal.m4
