@@ -24,6 +24,7 @@ Run: `./bazel-bin/tests/tests-cpp-examples`
 Run: `./tools/ci.sh`
 
 Notes:
+
 - Requires `node` + `npx` for the Markdown lint step.
 - Requires `clang-format` for the C++ format check (Ubuntu example: `sudo apt-get install -y clang-format`).
 - Uses Bazel if installed; otherwise downloads Bazelisk v1.20.0 into `.tools/`.
