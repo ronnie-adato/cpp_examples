@@ -1,0 +1,15 @@
+cc_library(
+    name = "all-nodes-distance-k",
+    srcs = [
+        "src/all_nodes_distance_k.cpp",
+        "src/tree_node.cpp",
+    ],
+    hdrs = glob(["include/*.hpp"], allow_empty = True),
+    includes = [
+        "include",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@ng-log//:ng-log",
+    ],
+)

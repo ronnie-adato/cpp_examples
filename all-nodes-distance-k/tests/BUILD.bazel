@@ -1,0 +1,17 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+exports_files(["COPYING"])
+
+cc_test(
+    name = "tests-all-nodes-distance-k",
+    srcs = [
+        "src/all_nodes_distance_k_generic_test.cpp",
+    ],
+    deps = [
+        "//all-nodes-distance-k:all-nodes-distance-k",
+        "@googletest//:gtest_main",
+        "@ng-log//:ng-log",
+    ],
+)
