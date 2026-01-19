@@ -6,12 +6,15 @@
 #include <string>
 #include <vector>
 
-namespace {
+namespace
+{
 
 std::vector<std::vector<std::string>> Normalize(std::vector<std::vector<std::string>> accounts)
 {
-    for (auto& account : accounts) {
-        if (account.size() > 1) {
+    for (auto& account : accounts)
+    {
+        if (account.size() > 1)
+        {
             std::sort(std::next(account.begin()), account.end());
         }
     }

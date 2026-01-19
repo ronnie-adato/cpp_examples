@@ -7,6 +7,6 @@
 
 class AccountsMerge
 {
-public:
+   public:
     std::vector<std::vector<std::string>> accountsMerge(const std::vector<std::vector<std::string>> &accounts);
 };
