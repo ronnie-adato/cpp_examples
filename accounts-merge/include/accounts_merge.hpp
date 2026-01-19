@@ -1,7 +1,5 @@
 #pragma once
 
-// TODO: Implement LeetCode 721 (Accounts Merge).
-
 #include <string>
 #include <vector>
 
