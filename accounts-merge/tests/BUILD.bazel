@@ -1,0 +1,17 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+exports_files(["COPYING"])
+
+cc_test(
+    name = "tests-accounts-merge",
+    srcs = [
+        "src/accounts_merge_generic_test.cpp",
+    ],
+    deps = [
+        "//accounts-merge:accounts-merge",
+        "@googletest//:gtest_main",
+        "@ng-log//:ng-log",
+    ],
+)
