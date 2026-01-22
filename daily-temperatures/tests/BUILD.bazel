@@ -1,0 +1,18 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+exports_files(["COPYING"])
+
+cc_test(
+    name = "tests-daily-temperatures",
+    srcs = [
+        "src/daily_temperatures_generic_test.cpp",
+    ],
+    deps = [
+        "//daily-temperatures:daily-temperatures",
+        "@googletest//:gtest_main",
+        "@ng-log//:ng-log",
+    ],
+)
+
