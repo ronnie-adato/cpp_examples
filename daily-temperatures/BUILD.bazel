@@ -1,0 +1,11 @@
+cc_library(
+    name = "daily-temperatures",
+    srcs = [
+        "src/daily_temperatures.cpp",
+    ],
+    hdrs = glob(["include/*.hpp"], allow_empty = True),
+    includes = [
+        "include",
+    ],
+    visibility = ["//visibility:public"],
+)
