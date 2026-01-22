@@ -1,0 +1,17 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+exports_files(["COPYING"])
+
+cc_test(
+    name = "tests-decode-string",
+    srcs = [
+        "src/decode_string_generic_test.cpp",
+    ],
+    deps = [
+        "//decode-string:decode-string",
+        "@googletest//:gtest_main",
+        "@ng-log//:ng-log",
+    ],
+)
