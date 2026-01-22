@@ -2,7 +2,6 @@
 
 #include "daily_temperatures.hpp"
 
-#include <algorithm>
 #include <random>
 #include <vector>
 
