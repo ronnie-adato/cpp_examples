@@ -20,25 +20,31 @@ std::string DecodeReference(const std::string &s)
 std::string DecodeReferenceImpl(const std::string &s, size_t &i)
 {
     std::string out;
-    while (i < s.size() && s[i] != ']') {
+    while (i < s.size() && s[i] != ']')
+    {
         const unsigned char uch = static_cast<unsigned char>(s[i]);
-        if (std::isdigit(uch) != 0) {
+        if (std::isdigit(uch) != 0)
+        {
             size_t repeat = 0;
-            while (i < s.size() && std::isdigit(static_cast<unsigned char>(s[i])) != 0) {
+            while (i < s.size() && std::isdigit(static_cast<unsigned char>(s[i])) != 0)
+            {
                 repeat = repeat * 10 + static_cast<size_t>(s[i] - '0');
                 ++i;
             }
             EXPECT_LT(i, s.size());
             EXPECT_EQ(s[i], '[');
-            ++i; // skip '['
+            ++i;  // skip '['
             std::string inside = DecodeReferenceImpl(s, i);
             EXPECT_LT(i, s.size());
             EXPECT_EQ(s[i], ']');
-            ++i; // skip ']'
-            for (size_t k = 0; k < repeat; ++k) {
+            ++i;  // skip ']'
+            for (size_t k = 0; k < repeat; ++k)
+            {
                 out += inside;
             }
-        } else {
+        }
+        else
+        {
             out += s[i];
             ++i;
         }
@@ -53,7 +59,8 @@ std::string RandomLetters(std::mt19937 &rng, size_t max_len)
     const size_t len = static_cast<size_t>(len_dist(rng));
     std::string out;
     out.reserve(len);
-    for (size_t i = 0; i < len; ++i) {
+    for (size_t i = 0; i < len; ++i)
+    {
         out.push_back(static_cast<char>('a' + char_dist(rng)));
     }
     return out;
@@ -67,22 +74,26 @@ std::string RandomEncoded(std::mt19937 &rng, int depth, size_t max_atoms)
 
     const int atoms = atoms_dist(rng);
     std::string out;
-    for (int a = 0; a < atoms; ++a) {
+    for (int a = 0; a < atoms; ++a)
+    {
         const int roll = coin(rng);
-        if (depth > 0 && roll < 45) {
+        if (depth > 0 && roll < 45)
+        {
             const int repeat = repeat_dist(rng);
             out += std::to_string(repeat);
             out += '[';
             out += RandomEncoded(rng, depth - 1, max_atoms);
             out += ']';
-        } else {
+        }
+        else
+        {
             out += RandomLetters(rng, 6);
         }
     }
     return out;
 }
 
-} // namespace
+}  // namespace
 
 TEST(DecodeStringGenericTest, BasicExamples)
 {
@@ -117,7 +128,8 @@ TEST(DecodeStringGenericTest, RandomizedAgainstReference)
     DecodeString solver;
     std::mt19937 rng(1337);
 
-    for (int t = 0; t < 300; ++t) {
+    for (int t = 0; t < 300; ++t)
+    {
         const std::string encoded = RandomEncoded(rng, /*depth=*/4, /*max_atoms=*/6);
         const std::string expected = DecodeReference(encoded);
         EXPECT_EQ(solver.decodeString(encoded), expected) << "encoded=\"" << encoded << "\"";

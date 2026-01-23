@@ -4,6 +4,6 @@
 
 class DecodeString
 {
-public:
+   public:
     std::string decodeString(const std::string &s);
 };
