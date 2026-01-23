@@ -34,5 +34,7 @@ cc_test(
         "//lru_cache/tests:tests-lru_cache",
         "//rotting-oranges:rotting_oranges",
         "//rotting-oranges/tests:tests-rotting_oranges",
+        "//decode-string:decode_string",
+        "//decode-string/tests:tests-decode-string",
     ],
 )

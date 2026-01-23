@@ -12,3 +12,9 @@ cc_library(
         "@ng-log//:ng-log",
     ],
 )
+
+alias(
+    name = "decode_string",
+    actual = ":decode-string",
+    visibility = ["//visibility:public"],
+)
