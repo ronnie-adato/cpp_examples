@@ -25,8 +25,8 @@ std::vector<double> EvaluateDivision::calcEquation(const std::vector<std::vector
                                                    const std::vector<double>& values,
                                                    const std::vector<std::vector<std::string>>& queries)
 {
-    LOG(INFO) << "EvaluateDivision::calcEquation"
-              << " equations=" << equations.size() << " values=" << values.size() << " queries=" << queries.size();
+    LOG(INFO) << "EvaluateDivision::calcEquation";
+    LOG(INFO) << "equations=" << equations.size() << " values=" << values.size() << " queries=" << queries.size();
 
     LOG(INFO) << "equations: " << std::endl << equations;
     LOG(INFO) << "queries: " << std::endl << queries;
