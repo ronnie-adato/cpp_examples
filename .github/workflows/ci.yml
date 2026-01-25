@@ -18,8 +18,13 @@ jobs:
       - name: C++ format check (clang-format)
         run: |
           sudo apt-get update
-          sudo apt-get install -y clang-format
-          git ls-files '*.cpp' '*.hpp' | xargs -r clang-format -n --Werror
+          # Prefer an explicit version when available to reduce formatting diffs across runner images.
+          sudo apt-get install -y clang-format-18 || sudo apt-get install -y clang-format
+          CLANG_FORMAT_BIN="clang-format"
+          if command -v clang-format-18 >/dev/null 2>&1; then
+            CLANG_FORMAT_BIN="clang-format-18"
+          fi
+          git ls-files '*.cpp' '*.hpp' | xargs -r "$CLANG_FORMAT_BIN" -style=file -n --Werror
 
       - name: Markdown format check (markdownlint)
         uses: DavidAnson/markdownlint-cli2-action@v16

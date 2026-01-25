@@ -76,7 +76,7 @@ ensure_bazel() {
 say "C++ format check (clang-format)"
 # Matches CI: git ls-files '*.cpp' '*.hpp' | xargs -r clang-format -n --Werror
 # shellcheck disable=SC2016
-git ls-files '*.cpp' '*.hpp' | xargs -r "$CLANG_FORMAT_BIN" -n --Werror
+git ls-files '*.cpp' '*.hpp' | xargs -r "$CLANG_FORMAT_BIN" -style=file -n --Werror
 
 say "Markdown format check (markdownlint-cli2)"
 need_cmd node

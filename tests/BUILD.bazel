@@ -36,5 +36,7 @@ cc_test(
         "//rotting-oranges/tests:tests-rotting_oranges",
         "//decode-string:decode_string",
         "//decode-string/tests:tests-decode-string",
+        "//evaluate-division:evaluate-division",
+        "//evaluate-division/tests:tests-evaluate-division",
     ],
 )

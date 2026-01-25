@@ -1,0 +1,17 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+exports_files(["COPYING"])
+
+cc_test(
+    name = "tests-evaluate-division",
+    srcs = [
+        "src/evaluate_division_generic_test.cpp",
+    ],
+    deps = [
+        "//evaluate-division:evaluate-division",
+        "@googletest//:gtest_main",
+        "@ng-log//:ng-log",
+    ],
+)
