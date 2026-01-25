@@ -32,6 +32,9 @@
 #include <iomanip>
 #include <iostream>
 
+#include <cstdlib>
+#include <string>
+
 #if defined(GTEST_OS_ESP8266) || defined(GTEST_OS_ESP32) ||                    \
     (defined(GTEST_OS_NRF52) && defined(ARDUINO))
 // Arduino-like platforms: program entry points are setup/loop instead of main.
@@ -71,12 +74,35 @@ void MyPrefixFormatter(std::ostream &s, const nglog::LogMessage &m,
     << std::setfill('0') << ' ' << m.basename() << ':' << m.line() << ']';
 }
 
+static std::string GetLogDir() {
+  if (const char* dir = std::getenv("CPP_EXAMPLES_LOG_DIR")) {
+    if (dir[0] != '\0') return dir;
+  }
+  // Bazel provides these for tests. Prefer undeclared outputs so logs are
+  // preserved as test artifacts.
+  if (const char* dir = std::getenv("TEST_UNDECLARED_OUTPUTS_DIR")) {
+    if (dir[0] != '\0') return dir;
+  }
+  if (const char* dir = std::getenv("TEST_TMPDIR")) {
+    if (dir[0] != '\0') return dir;
+  }
+  return ".";
+}
+
 GTEST_API_ int main(int argc, char **argv) {
   // Initialize Google Test
   testing::InitGoogleTest(&argc, argv);
 
   // Set the minimum log level
   FLAGS_minloglevel = nglog::INFO;
+
+  // Send ng-log output to files only.
+  FLAGS_log_dir = GetLogDir();
+  FLAGS_logtostderr = false;
+  FLAGS_alsologtostderr = false;
+  FLAGS_logtostdout = false;
+  // Avoid any stderr output from ng-log based on severity thresholds.
+  FLAGS_stderrthreshold = nglog::NGLOG_FATAL + 1;
 
   // Initialize ng-log with a custom prefix
   nglog::InstallPrefixFormatter(&MyPrefixFormatter);
