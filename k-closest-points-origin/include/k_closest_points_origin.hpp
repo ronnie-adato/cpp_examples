@@ -1,7 +1,5 @@
 #pragma once
 
-// TODO: Implement LeetCode 973 (K Closest Points to Origin).
-
 #include <vector>
 
 class KClosestPointsOrigin
