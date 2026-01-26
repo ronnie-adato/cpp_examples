@@ -1,11 +1,9 @@
 #include "evaluate_division.hpp"
 
 #include <ng-log/logging.h>
-#include <algorithm>
 #include <cstddef>
 #include <ostream>
 #include <queue>
-#include <sstream>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
