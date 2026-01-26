@@ -1,0 +1,17 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+exports_files(["COPYING"])
+
+cc_test(
+    name = "tests-remove-k-digits",
+    srcs = [
+        "src/remove_k_digits_generic_test.cpp",
+    ],
+    deps = [
+        "//remove-k-digits:remove-k-digits",
+        "@googletest//:gtest_main",
+        "@ng-log//:ng-log",
+    ],
+)
