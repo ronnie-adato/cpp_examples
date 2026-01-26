@@ -1,0 +1,17 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+exports_files(["COPYING"])
+
+cc_test(
+    name = "tests-k-closest-points-origin",
+    srcs = [
+        "src/k_closest_points_origin_generic_test.cpp",
+    ],
+    deps = [
+        "//k-closest-points-origin:k-closest-points-origin",
+        "@googletest//:gtest_main",
+        "@ng-log//:ng-log",
+    ],
+)

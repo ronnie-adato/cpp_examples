@@ -1,0 +1,14 @@
+cc_library(
+    name = "k-closest-points-origin",
+    srcs = [
+        "src/k_closest_points_origin.cpp",
+    ],
+    hdrs = glob(["include/*.hpp"], allow_empty = True),
+    includes = [
+        "include",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@ng-log//:ng-log",
+    ],
+)
