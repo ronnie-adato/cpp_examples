@@ -1,0 +1,17 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+exports_files(["COPYING"])
+
+cc_test(
+    name = "tests-search-rotated-array",
+    srcs = [
+        "src/search_rotated_array_generic_test.cpp",
+    ],
+    deps = [
+        "//search-rotated-array:search-rotated-array",
+        "@googletest//:gtest_main",
+        "@ng-log//:ng-log",
+    ],
+)
