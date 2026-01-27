@@ -7,7 +7,8 @@
 #include <unordered_set>
 #include <vector>
 
-namespace {
+namespace
+{
 
 std::vector<int> makeIncreasingUnique(int n, int start, int step)
 {
