@@ -3,7 +3,6 @@
 #include "k_closest_points_origin.hpp"
 
 #include <cstddef>
-#include <cstdint>
 #include <map>
 #include <random>
 #include <utility>
