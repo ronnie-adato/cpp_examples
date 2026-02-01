@@ -2,6 +2,9 @@
 
 LeetCode: <https://leetcode.com/problems/subarray-sum-equals-k/>
 
-Scaffold only: Bazel package + C++ header/source + gtest skeleton.
-
 **Topics**: Prefix Sum, Hash Map
+
+Prefix-sum + hash-map solution.
+
+- Time: $O(n)$
+- Space: $O(n)$
