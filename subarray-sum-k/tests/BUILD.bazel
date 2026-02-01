@@ -1,0 +1,17 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+exports_files(["COPYING"])
+
+cc_test(
+    name = "tests-subarray-sum-k",
+    srcs = [
+        "src/subarray_sum_k_generic_test.cpp",
+    ],
+    deps = [
+        "//subarray-sum-k:subarray-sum-k",
+        "@googletest//:gtest_main",
+        "@ng-log//:ng-log",
+    ],
+)
