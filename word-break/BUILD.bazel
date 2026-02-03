@@ -1,0 +1,14 @@
+cc_library(
+    name = "word-break",
+    srcs = [
+        "src/word_break.cpp",
+    ],
+    hdrs = glob(["include/*.hpp"], allow_empty = True),
+    includes = [
+        "include",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "@ng-log//:ng-log",
+    ],
+)
