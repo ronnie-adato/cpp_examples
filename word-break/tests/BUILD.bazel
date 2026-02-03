@@ -1,0 +1,17 @@
+package(default_visibility = ["//visibility:public"])
+
+licenses(["notice"])
+
+exports_files(["COPYING"])
+
+cc_test(
+    name = "tests-word-break",
+    srcs = [
+        "src/word_break_generic_test.cpp",
+    ],
+    deps = [
+        "//word-break:word-break",
+        "@googletest//:gtest_main",
+        "@ng-log//:ng-log",
+    ],
+)
