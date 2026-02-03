@@ -1,59 +1,61 @@
 #include "word_break.hpp"
 
 #include <ng-log/logging.h>
-#include <cstddef>
-#include <memory>
+#include <algorithm>
+#include <string_view>
+#include <unordered_set>
+#include <vector>
 
 bool WordBreak::wordBreak(const std::string& s, const std::vector<std::string>& wordDict)
 {
-    LOG(INFO) << "wordBreak entry: s: [" << s << "] dict_size=" << wordDict.size();
-    std::set<std::string> dict(wordDict.cbegin(), wordDict.cend());
+    LOG(INFO) << "wordBreak: s=\"" << s << "\" len=" << s.size() << " dict_size=" << wordDict.size();
     if (s.empty())
     {
-        LOG(INFO) << "wordBreak early-return: empty string -> true";
+        LOG(INFO) << "wordBreak: empty string -> true";
         return true;
     }
 
-    TreeNode node;
-    const bool result = wordBreak(&node, s, dict);
-    LOG(INFO) << "wordBreak exit: result=" << (result ? "true" : "false") << " s_len=" << s.size();
-    return result;
-}
-
-bool WordBreak::wordBreak(TreeNode* node, const std::string& s, const std::set<std::string>& wordDict)
-{
-    LOG(INFO) << "wordBreak entry: s: [" << s << "], node->word: [" << node->word << "]";
-    while (node->word.size() < s.size())
+    std::unordered_set<std::string_view> dict;
+    dict.reserve(wordDict.size());
+    std::unordered_set<size_t> lengths;
+    lengths.reserve(wordDict.size());
+    size_t maxLen = 0;
+    for (const auto& word : wordDict)
     {
-        LOG(INFO) << "extend prefix: current=\"" << node->word << "\" next_char=\"" << s[node->word.size()]
-                  << "\" remaining_len=" << s.size() - node->word.size();
-        node->word.push_back(s[node->word.size()]);
-        auto it = wordDict.lower_bound(node->word);
-        if (it == wordDict.end() || node->word != it->substr(0, node->word.size()))
+        dict.insert(word);
+        lengths.insert(word.size());
+        maxLen = std::max(maxLen, word.size());
+    }
+    LOG(INFO) << "wordBreak: unique_words=" << dict.size() << " unique_lengths=" << lengths.size()
+              << " maxLen=" << maxLen;
+
+    std::vector<bool> dp(s.size() + 1, false);
+    dp[0] = true;
+
+    for (size_t i = 1; i <= s.size(); ++i)
+    {
+        const size_t upperLen = std::min(i, maxLen);
+        for (const size_t len : lengths)
         {
-            LOG(INFO) << "prefix rejected: \"" << node->word << "\"";
-            node->word.pop_back();
-            return false;
-        }
-        if (node->word == *it)
-        {
-            LOG(INFO) << "word hit: \"" << node->word << "\"; recursing";
-            node->children.emplace_back(std::make_shared<TreeNode>());
-            if (wordBreak(node->children.back().get(), s.substr(node->word.size()), wordDict))
+            if (len == 0 || len > upperLen)
             {
-                LOG(INFO) << "word break success at prefix: \"" << node->word << "\"";
-                return true;
+                continue;
             }
-            LOG(INFO) << "backtrack from prefix: \"" << node->word << "\"";
+            const size_t j = i - len;
+            if (!dp[j])
+            {
+                continue;
+            }
+            const std::string_view slice(s.data() + j, len);
+            if (dict.find(slice) != dict.end())
+            {
+                LOG(INFO) << "dp[" << i << "]=true via dp[" << j << "] and word=\"" << slice << "\"";
+                dp[i] = true;
+                break;
+            }
         }
     }
 
-    if (s.empty())
-    {
-        LOG(INFO) << "wordBreak early-return: empty string -> true";
-        return true;
-    }
-    LOG(INFO) << "exhausted prefix: \"" << node->word << "\"";
-
-    return wordDict.find(node->word) != wordDict.end();
+    LOG(INFO) << "wordBreak: result=" << (dp[s.size()] ? "true" : "false");
+    return dp[s.size()];
 }
