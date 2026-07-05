@@ -1,10 +1,10 @@
-# Rotting Oranges (LeetCode 994)
+# Rotting Oranges (LeetCode 994, Medium)
 
 LeetCode: <https://leetcode.com/problems/rotting-oranges/>
 
-## Task
+## Problem Description
 
-You are given a grid where:
+Given a grid where each cell may be empty, contain a fresh orange, or contain a rotten orange:
 
 - `0` = empty cell
 - `1` = fresh orange
@@ -12,7 +12,26 @@ You are given a grid where:
 
 Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten.
 
-Return the minimum number of minutes until no fresh orange remains. If it’s impossible, return `-1`.
+Return the minimum number of minutes until no fresh orange remains. If this is impossible, return
+`-1`.
+
+## Examples
+
+```text
+Input: grid = [[2,1,1],[1,1,0],[0,1,1]]
+Output: 4
+```
+
+```text
+Input: grid = [[2,1,1],[0,1,1],[1,0,1]]
+Output: -1
+Explanation: The fresh orange in the bottom-left corner can never rot.
+```
+
+```text
+Input: grid = [[0,2]]
+Output: 0
+```
 
 ## Approach (BFS)
 
