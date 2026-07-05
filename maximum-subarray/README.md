@@ -1,17 +1,14 @@
-# Problem Description
+# Maximum Subarray (LeetCode 53, Medium)
 
-This folder contains C++ implementations and tests for the **Maximum Subarray** problem, which
-appears on LeetCode and other coding platforms.
+LeetCode: <https://leetcode.com/problems/maximum-subarray/>
 
-**Problem summary:**
+## Problem Description
 
-> Given an integer array `nums`, find the contiguous subarray (containing at least one number)
-> which has the largest sum and return its sum.
+Given an integer array `nums`, find the contiguous non-empty subarray with the largest sum and
+return that sum.
 
-**Reference:**
+## API
 
-- [LeetCode 53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/description/)
-
-```c++
+```cpp
 int maxSubArray(std::vector<int>& nums);
 ```

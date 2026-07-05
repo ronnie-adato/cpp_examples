@@ -1,9 +1,13 @@
-# Largest Square
+# Maximal Square (LeetCode 221, Medium)
 
-## Task
+LeetCode: <https://leetcode.com/problems/maximal-square/>
 
-Given a 2D matrix of integers, compute the side-length of the largest axis-aligned square
-sub-matrix whose cells are all non-zero.
+## Problem Description
+
+Given a binary matrix, find the largest square containing only `1` values.
+
+LeetCode asks for the area of that square. This module uses the same problem shape, but its API
+returns the side length and treats any non-zero integer cell as `1`.
 
 ## API
 

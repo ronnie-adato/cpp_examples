@@ -1,20 +1,15 @@
-# Problem Description
+# Range Module (LeetCode 715, Hard)
 
-A popular coding exercise involving half-open ranges is the **"Range Module"** problem, which
-appears on LeetCode and other coding platforms. The problem involves designing a data structure to
-add, remove, and query half-open intervals.
+LeetCode: <https://leetcode.com/problems/range-module/>
 
-**Problem summary:**
+## Problem Description
 
-> Design a data structure to track ranges of numbers. Implement the following methods:
->
-> - `add_range(left, right)`: Adds the half-open interval [left, right) to the structure.
-> - `remove_range(left, right)`: Removes the half-open interval [left, right) from the structure.
-> - `query_range(left, right)`: Returns true if every number in the interval [left, right) is currently tracked.
+Design a data structure that tracks half-open integer ranges of the form `[left, right)`.
 
-**Reference:**
+It should support adding ranges, removing ranges, and querying whether every number in a requested
+range is currently tracked.
 
-- [LeetCode 715. Range Module](https://leetcode.com/problems/range-module/)
+## API
 
 ```cpp
 class Ranges {

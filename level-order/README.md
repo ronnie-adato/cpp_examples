@@ -1,15 +1,11 @@
-# Binary Tree Level Order Traversal (LeetCode 102)
+# Binary Tree Level Order Traversal (LeetCode 102, Medium)
 
 LeetCode: <https://leetcode.com/problems/binary-tree-level-order-traversal/>
 
-## Task
+## Problem Description
 
 Given the `root` of a binary tree, return the level order traversal of its nodes' values.
-(Level order means from left to right, level by level.)
-
-## Notes
-
-This module is intentionally scaffold-only (no implementation yet).
+Level order means visiting nodes from left to right, level by level.
 
 ## Build / Test (Bazel)
 

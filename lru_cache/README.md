@@ -1,23 +1,23 @@
-# LRU Cache Implementation
+# LRU Cache (LeetCode 146, Medium)
 
-## Task
-
-Implement a Least Recently Used (LRU) cache class in C++.
+LeetCode: <https://leetcode.com/problems/lru-cache/>
 
 ## Problem Description
 
-The LRU cache should support the following operations in O(1) time complexity:
+Design a least recently used cache with a positive capacity.
 
-- `get(key)`: Returns the value of the key if the key exists in the cache, otherwise throws an exception.
+The cache should support the following operations in `O(1)` average time:
+
+- `get(key)`: Return the value for `key` if it exists, otherwise report a miss.
 - `put(key, value)`: Sets or inserts the value if the key is not already present. When the cache
-  reaches its capacity, it should invalidate the least recently used item before inserting a new
-  item.
+  reaches its capacity, evict the least recently used item before inserting a new item.
 
 ## Requirements
 
 - The constructor should accept the cache’s capacity.
 - Use appropriate STL containers.
 - Thread safety is not required, but code clarity matters.
+- This implementation reports a cache miss by throwing `std::out_of_range`.
 
 ## Example Usage
 
