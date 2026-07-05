@@ -27,3 +27,8 @@ Output: -1
 ```
 
 **Topics**: Binary Search
+
+## Build / Test (Bazel)
+
+- Build: `bazel build //search-rotated-array/...`
+- Test: `bazel test //search-rotated-array/tests:tests-search-rotated-array`

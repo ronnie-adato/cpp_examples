@@ -19,21 +19,31 @@ The cache should support the following operations in `O(1)` average time:
 - Thread safety is not required, but code clarity matters.
 - This implementation reports a cache miss by throwing `std::out_of_range`.
 
-## Example Usage
+## Examples
 
-```cpp
-LRUCache cache(2); // capacity = 2
-cache.put(1, 1);
-cache.put(2, 2);
-cache.get(1);    // returns 1
-cache.put(3, 3); // evicts key 2
-try {
-  cache.get(2); // throws exception (not found)
-} catch (const std::out_of_range&) {}
-cache.put(4, 4); // evicts key 1
-try {
-  cache.get(1); // throws exception (not found)
-} catch (const std::out_of_range&) {}
-cache.get(3);    // returns 3
-cache.get(4);    // returns 4
+```text
+Input:
+["LRUCache","put","put","get","put","get","put","get","get","get"]
+[[2],[1,1],[2,2],[1],[3,3],[2],[4,4],[1],[3],[4]]
+Output:
+[null,null,null,1,null,-1,null,-1,3,4]
 ```
+
+## Illustration
+
+```mermaid
+flowchart LR
+    subgraph Cache["capacity = 2"]
+        H["most recent"] --> K4["key 4<br/>value 4"]
+        K4 --> K3["key 3<br/>value 3"]
+        K3 --> T["least recent"]
+    end
+
+    Map["hash map<br/>3 -> node<br/>4 -> node"] -. O(1) lookup .-> K3
+    Map -. O(1) lookup .-> K4
+```
+
+## Build / Test (Bazel)
+
+- Build: `bazel build //lru_cache/...`
+- Test: `bazel test //lru_cache/tests:tests-lru_cache`

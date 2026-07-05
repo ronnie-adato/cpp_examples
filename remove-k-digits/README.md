@@ -31,3 +31,8 @@ Explanation: All digits are removed.
 ```
 
 **Topics**: Greedy, Monotonic Stack
+
+## Build / Test (Bazel)
+
+- Build: `bazel build //remove-k-digits/...`
+- Test: `bazel test //remove-k-digits/tests:tests-remove-k-digits`

@@ -10,3 +10,8 @@ This module demonstrates a polymorphic handler/message pattern in C++:
 - Only `Handler2` handles `Message3`; `Handler1` does not process this message type.
 
 This design allows flexible and type-safe message dispatch, with clear separation of shared and specialized behavior.
+
+## Build / Test (Bazel)
+
+- Build: `bazel build //handlers/...`
+- Test: `bazel test //handlers/tests:tests-handlers`

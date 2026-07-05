@@ -33,6 +33,19 @@ Input: grid = [[0,2]]
 Output: 0
 ```
 
+## Illustration
+
+```mermaid
+flowchart LR
+    M0["minute 0<br/>2 1 1<br/>1 1 0<br/>0 1 1"]
+    M1["minute 1<br/>2 2 1<br/>2 1 0<br/>0 1 1"]
+    M2["minute 2<br/>2 2 2<br/>2 2 0<br/>0 1 1"]
+    M3["minute 3<br/>2 2 2<br/>2 2 0<br/>0 2 1"]
+    M4["minute 4<br/>2 2 2<br/>2 2 0<br/>0 2 2"]
+
+    M0 --> M1 --> M2 --> M3 --> M4
+```
+
 ## Approach (BFS)
 
 Use **multi-source BFS**:
