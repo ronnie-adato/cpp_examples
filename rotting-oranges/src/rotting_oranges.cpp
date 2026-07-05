@@ -1,6 +1,7 @@
 #include "rotting_oranges.hpp"
 
 #include <ng-log/logging.h>
+#include <sys/types.h>
 #include <cstddef>
 #include <ostream>
 #include <queue>
@@ -9,12 +10,11 @@ struct Cell
 {
     size_t i;
     size_t j;
-    size_t second;
 };
 
 std::ostream& operator<<(std::ostream& os, const Cell& cell)
 {
-    os << "(" << cell.i << ", " << cell.j << ") at second " << cell.second;
+    os << "(" << cell.i << ", " << cell.j << ")";
     return os;
 }
 
@@ -42,7 +42,7 @@ int rotting_oranges_minutes(const std::vector<std::vector<int>>& grid)
         {
             if (grid[i][j] == 2)
             {
-                q.push({i, j, 0});
+                q.push({i, j});
             }
             else if (grid[i][j] == 1)
             {
@@ -54,30 +54,38 @@ int rotting_oranges_minutes(const std::vector<std::vector<int>>& grid)
     LOG(INFO) << "Initial good oranges: " << good_oranges << std::endl;
     size_t total_seconds = 0;
     std::vector<std::vector<int>> mygrid = grid;
-    while (!q.empty())
+    while (!q.empty() && good_oranges > 0)
     {
-        Cell cell = q.front();
-        q.pop();
-        total_seconds = cell.second;
-        // down
-        if (cell.i + 1 < rows && mygrid[cell.i + 1][cell.j] == 1)
+        ++total_seconds;
+        size_t qsize = q.size();
+        for (size_t i = 0; i < qsize; ++i)
         {
-            add_to_queue(mygrid, q, good_oranges, {cell.i + 1, cell.j, total_seconds + 1});
+            Cell cell = q.front();
+            q.pop();
+            // down
+            if (cell.i + 1 < rows && mygrid[cell.i + 1][cell.j] == 1)
+            {
+                add_to_queue(mygrid, q, good_oranges, {cell.i + 1, cell.j});
+            }
+            // up
+            if (cell.i > 0 && mygrid[cell.i - 1][cell.j] == 1)
+            {
+                add_to_queue(mygrid, q, good_oranges, {cell.i - 1, cell.j});
+            }
+            // right
+            if (cell.j + 1 < cols && mygrid[cell.i][cell.j + 1] == 1)
+            {
+                add_to_queue(mygrid, q, good_oranges, {cell.i, cell.j + 1});
+            }
+            // left
+            if (cell.j > 0 && mygrid[cell.i][cell.j - 1] == 1)
+            {
+                add_to_queue(mygrid, q, good_oranges, {cell.i, cell.j - 1});
+            }
         }
-        // up
-        if (cell.i > 0 && mygrid[cell.i - 1][cell.j] == 1)
+        if (q.empty())
         {
-            add_to_queue(mygrid, q, good_oranges, {cell.i - 1, cell.j, total_seconds + 1});
-        }
-        // right
-        if (cell.j + 1 < cols && mygrid[cell.i][cell.j + 1] == 1)
-        {
-            add_to_queue(mygrid, q, good_oranges, {cell.i, cell.j + 1, total_seconds + 1});
-        }
-        // left
-        if (cell.j > 0 && mygrid[cell.i][cell.j - 1] == 1)
-        {
-            add_to_queue(mygrid, q, good_oranges, {cell.i, cell.j - 1, total_seconds + 1});
+            --total_seconds;
         }
     }
 
