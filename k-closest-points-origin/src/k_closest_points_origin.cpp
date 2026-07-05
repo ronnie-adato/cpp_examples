@@ -31,22 +31,43 @@ std::ostream& operator<<(std::ostream& stream, const std::vector<T>& vec)
     return stream;
 }
 
+std::ostream& operator<<(std::ostream& stream, const std::vector<std::vector<int>::iterator>& vec)
+{
+    stream << "{ ";
+    for (auto it = vec.begin(); it != vec.end(); ++it)
+    {
+        stream << **it;
+        if (std::distance(it, vec.end()) > 1)
+        {
+            stream << ", ";
+        }
+    }
+    stream << " }";
+
+    return stream;
+}
+
 std::vector<std::vector<int>> KClosestPointsOrigin::kClosest(const std::vector<std::vector<int>>& points, int k)
 {
     LOG(INFO) << "k: " << k << " points: " << points;
-    std::vector<std::pair<int, size_t>> distances(points.size());
+    std::vector<int> distances(points.size());
+    typedef std::vector<int>::iterator IT;
+    std::vector<IT> distances_it(points.size());
     std::vector<std::vector<int>> results;
     results.reserve(k);
+    IT it = distances.begin();
     for (size_t i = 0; i < points.size(); ++i)
     {
-        distances[i] = std::make_pair(points[i][0] * points[i][0] + points[i][1] * points[i][1], i);
+        *it = points[i][0] * points[i][0] + points[i][1] * points[i][1];
+        distances_it[i] = it++;
     }
-    for (size_t i = 0; i < k && i < distances.size(); ++i)
+    for (size_t i = 0; i < k && i < distances_it.size(); ++i)
     {
-        std::make_heap(std::next(distances.rbegin(), i), distances.rend(),
-                       [](const std::pair<int, size_t>& a, const std::pair<int, size_t>& b)
-                       { return a.first < b.first; });
-        results.push_back(points[distances[i].second]);
+        std::make_heap(std::next(distances_it.rbegin(), i), distances_it.rend(),
+                       [](const IT& a, const IT& b) { return *a < *b; });
+        LOG(INFO) << "distances heap: " << distances_it;
+        auto pos = std::distance(distances.begin(), distances_it[i]);
+        results.push_back(points[pos]);
     }
     LOG(INFO) << "distances: " << distances;
     LOG(INFO) << "results: " << results;
