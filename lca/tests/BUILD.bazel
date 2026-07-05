@@ -3,7 +3,7 @@ package(default_visibility = ["//visibility:public"])
 licenses(["notice"])
 
 cc_library(
-    name = "tests-lca",
+    name = "tests-lca-lib",
     hdrs = glob(["include/*.hpp"], allow_empty = True),
     strip_include_prefix = "include",
     srcs = [
@@ -15,4 +15,12 @@ cc_library(
         "@googletest//:gtest_main",
     ],
     visibility = ["//visibility:public"],
+)
+
+cc_test(
+    name = "tests-lca",
+    deps = [
+        ":tests-lca-lib",
+        "@googletest//:gtest_main",
+    ],
 )

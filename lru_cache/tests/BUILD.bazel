@@ -5,7 +5,7 @@ licenses(["notice"])
 exports_files(["COPYING"])
 
 cc_library(
-    name = "tests-lru_cache",
+    name = "tests-lru_cache-lib",
     hdrs = glob(["include/*.hpp"], allow_empty=True),
     strip_include_prefix = "include",
     srcs = [
@@ -19,4 +19,11 @@ cc_library(
     visibility = ["//visibility:public"],
 )
 
+cc_test(
+    name = "tests-lru_cache",
+    deps = [
+        ":tests-lru_cache-lib",
+        "@googletest//:gtest_main",
+    ],
+)
 
