@@ -5,7 +5,7 @@ licenses(["notice"])
 exports_files(["COPYING"])
 
 cc_library(
-    name = "tests-level_order",
+    name = "tests-level_order-lib",
     hdrs = glob(["include/*.hpp"], allow_empty = True),
     strip_include_prefix = "include",
     srcs = [
@@ -16,4 +16,12 @@ cc_library(
         "@googletest//:gtest_main",
     ],
     visibility = ["//visibility:public"],
+)
+
+cc_test(
+    name = "tests-level_order",
+    deps = [
+        ":tests-level_order-lib",
+        "@googletest//:gtest_main",
+    ],
 )

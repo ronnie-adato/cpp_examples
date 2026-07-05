@@ -5,7 +5,7 @@ licenses(["notice"])
 exports_files(["COPYING"])
 
 cc_library(
-    name = "tests-maximum-subarray",
+    name = "tests-maximum-subarray-lib",
     hdrs = glob(["include/*.hpp"], allow_empty = True,),
     strip_include_prefix = "include",
     srcs = [
@@ -19,4 +19,11 @@ cc_library(
     visibility = ["//visibility:public"],
 )
 
+cc_test(
+    name = "tests-maximum-subarray",
+    deps = [
+        ":tests-maximum-subarray-lib",
+        "@googletest//:gtest_main",
+    ],
+)
 

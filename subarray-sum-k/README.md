@@ -25,3 +25,8 @@ Prefix-sum + hash-map solution.
 
 - Time: $O(n)$
 - Space: $O(n)$
+
+## Build / Test (Bazel)
+
+- Build: `bazel build //subarray-sum-k/...`
+- Test: `bazel test //subarray-sum-k/tests:tests-subarray-sum-k`

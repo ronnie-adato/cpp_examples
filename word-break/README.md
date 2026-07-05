@@ -28,4 +28,19 @@ Input: s = "catsandog", wordDict = ["cats","dog","sand","and","cat"]
 Output: false
 ```
 
+## Illustration
+
+```mermaid
+flowchart LR
+    I0["0"] -- leet --> I4["4"]
+    I4 -- code --> I8["8"]
+    I0 -. "dp[0] = true" .-> I0
+    I8 -. "reached end" .-> Done["true"]
+```
+
 **Topics**: DP, Trie (optional)
+
+## Build / Test (Bazel)
+
+- Build: `bazel build //word-break/...`
+- Test: `bazel test //word-break/tests:tests-word-break`
