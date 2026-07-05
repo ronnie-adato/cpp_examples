@@ -33,7 +33,7 @@ cc_test(
         "//lru_cache:lru_cache",
         "//lru_cache/tests:tests-lru_cache",
         "//rotting-oranges:rotting_oranges",
-        "//rotting-oranges/tests:tests-rotting_oranges",
+        "//rotting-oranges/tests:tests-rotting_oranges-lib",
         "//decode-string:decode_string",
         "//decode-string/tests:tests-decode-string",
         "//evaluate-division:evaluate-division",
