@@ -2,15 +2,16 @@
 
 #include <vector>
 
-// Helper function to create a linked list
-auto CreateLinkedList(const std::vector<int> &values, const std::vector<int> &afriend_indices) -> Node *
+auto CreateLinkedList(const std::vector<int>& values, const std::vector<int>& afriend_indices) -> Node*
 {
     if (values.empty())
     {
         return nullptr;
     }
 
-    std::vector<Node *> nodes(values.size(), nullptr);
+    std::vector<Node*> nodes(values.size(), nullptr);
+    // Keep raw pointers in a side array so afriend indexes can be resolved
+    // after the next chain has been constructed.
     for (size_t i = 0; i < values.size(); ++i)
     {
         nodes[i] = new Node{values[i], nullptr, nullptr};
@@ -31,12 +32,11 @@ auto CreateLinkedList(const std::vector<int> &values, const std::vector<int> &af
     return nodes[0];
 }
 
-// Helper function to delete a linked list
-void DeleteLinkedList(Node *root)
+void DeleteLinkedList(Node* root)
 {
     while (root)
     {
-        Node *temp = root;
+        Node* temp = root;
         root = root->next;
         delete temp;
     }

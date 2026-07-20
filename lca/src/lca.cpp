@@ -35,6 +35,8 @@ constexpr auto operator&=(State& lhs, State rhs) noexcept -> State&
 
 auto lowest_common_ancestor(TreeNode* root, TreeNode* p, TreeNode* q, State& state) -> TreeNode*
 {
+    // State records which target nodes have been found in the current search.
+    // When a child search finds the second target, the current root is the LCA.
     if (root == p)
     {
         state |= State::P;

@@ -3,7 +3,7 @@
 
 #include <ng-log/logging.h>
 
-// Add other implementations here if needed
+// Typed tests make it easy to add more Range implementations later.
 typedef ::testing::Types<RRanges> RangeImplementations;
 
 TYPED_TEST_SUITE(RangesTypedTest, RangeImplementations);
@@ -29,6 +29,7 @@ TYPED_TEST(RangesTypedTest, AddOverlappingRanges)
 TYPED_TEST(RangesTypedTest, RemoveRange)
 {
     this->rr->add_range(1, 10);
+    // Removing the middle splits the tracked half-open interval.
     this->rr->remove_range(3, 7);
     EXPECT_TRUE(this->rr->query_range(1, 3));
     EXPECT_TRUE(this->rr->query_range(7, 10));
@@ -47,6 +48,7 @@ TYPED_TEST(RangesTypedTest, AddRemoveAndQueryEdgeCases)
 {
     this->rr->add_range(1, 5);
     this->rr->add_range(10, 15);
+    // Removal can trim the end of one interval and the start of another.
     this->rr->remove_range(3, 12);
     EXPECT_TRUE(this->rr->query_range(1, 3));
     EXPECT_TRUE(this->rr->query_range(12, 15));

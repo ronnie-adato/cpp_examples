@@ -26,6 +26,8 @@ std::vector<int> AllNodesDistanceK::distanceK(TreeNode* root, TreeNode* target, 
     std::queue<TreeNode*> q;
     std::unordered_set<TreeNode*> visited;
 
+    // After converting the tree to an undirected graph, ordinary level-order
+    // BFS from the target reaches exactly distance-k nodes after k layers.
     q.push(target);
     visited.insert(target);
 
@@ -73,6 +75,7 @@ void AllNodesDistanceK::create_adj_list_(TreeNode* root,
         return;
     }
 
+    // Touch the key so leaf nodes still appear in the adjacency list.
     (void)adj_list[root];
 
     if (root->left != nullptr)

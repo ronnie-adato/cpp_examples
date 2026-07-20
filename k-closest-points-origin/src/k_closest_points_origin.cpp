@@ -56,6 +56,8 @@ std::vector<std::vector<int>> KClosestPointsOrigin::kClosest(const std::vector<s
     std::vector<std::vector<int>> results;
     results.reserve(k);
     IT it = distances.begin();
+    // Store squared distances only; taking square roots would preserve the
+    // ordering but costs extra work.
     for (size_t i = 0; i < points.size(); ++i)
     {
         *it = points[i][0] * points[i][0] + points[i][1] * points[i][1];
@@ -63,6 +65,7 @@ std::vector<std::vector<int>> KClosestPointsOrigin::kClosest(const std::vector<s
     }
     for (size_t i = 0; i < k && i < distances_it.size(); ++i)
     {
+        // Rebuild a heap over the unchosen suffix and take its closest point.
         std::make_heap(std::next(distances_it.rbegin(), i), distances_it.rend(),
                        [](const IT& a, const IT& b) { return *a < *b; });
         LOG(INFO) << "distances heap: " << distances_it;

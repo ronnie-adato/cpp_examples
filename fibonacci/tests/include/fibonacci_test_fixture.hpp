@@ -5,5 +5,6 @@
 class FibonacciTestFixture : public ::testing::Test
 {
    protected:
+    // Shared instance lets tests exercise memoization across calls.
     Fibonacci fib;
 };

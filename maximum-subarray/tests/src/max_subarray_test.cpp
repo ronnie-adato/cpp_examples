@@ -2,7 +2,7 @@
 #include <vector>
 
 // Declaration of the function under test
-int maxSubArray(const std::vector<int> &nums);
+int maxSubArray(const std::vector<int>& nums);
 
 TEST(MaxSubArrayTest, HandlesSingleElement)
 {

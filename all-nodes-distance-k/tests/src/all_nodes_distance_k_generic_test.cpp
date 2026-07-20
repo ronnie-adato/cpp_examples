@@ -13,6 +13,7 @@ struct TreeBuilder
 {
     std::vector<std::unique_ptr<TreeNode>> nodes;
 
+    // Own nodes in the builder while returning raw pointers for tree wiring.
     TreeNode* Make(int val)
     {
         nodes.push_back(std::make_unique<TreeNode>(val));
@@ -22,6 +23,7 @@ struct TreeBuilder
 
 std::vector<int> Sorted(std::vector<int> values)
 {
+    // BFS output order is not important to the problem, only membership is.
     std::sort(values.begin(), values.end());
     return values;
 }

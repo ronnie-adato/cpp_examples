@@ -3,7 +3,7 @@
 
 #include "ng-log/logging.h"
 
-auto MSol::Clone(Node *root) -> Node *
+auto MSol::Clone(Node* root) -> Node*
 {
     if (root == nullptr)
     {
@@ -13,6 +13,7 @@ auto MSol::Clone(Node *root) -> Node *
 
     LOG(INFO) << "Begin: " << root;
 
+    // Phase 1: interleave each cloned node immediately after its original.
     for (auto r = root; r != nullptr; r = r->next->next)
     {
         auto cr = new Node{r->value + 10, r->next, nullptr};
@@ -20,6 +21,7 @@ auto MSol::Clone(Node *root) -> Node *
     }
     LOG(INFO) << "Phase 1: " << root;
 
+    // Phase 2: a cloned friend is one hop after the original friend's node.
     for (auto r = root; r != nullptr; r = r->next->next)
     {
         if (r->afriend != nullptr)
@@ -31,6 +33,7 @@ auto MSol::Clone(Node *root) -> Node *
 
     auto croot = root->next;
 
+    // Phase 3: detach the interleaved list into original and cloned lists.
     for (auto r = root, ctmp = croot; r != nullptr; r = r->next, ctmp = ctmp->next)
     {
         r->next = ctmp->next;

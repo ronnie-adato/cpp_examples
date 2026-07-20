@@ -5,5 +5,6 @@
 class DailyTemperatures
 {
    public:
-    std::vector<int> dailyTemperatures(const std::vector<int> &temperatures);
+    // For each day, returns how many days pass before a warmer temperature.
+    std::vector<int> dailyTemperatures(const std::vector<int>& temperatures);
 };

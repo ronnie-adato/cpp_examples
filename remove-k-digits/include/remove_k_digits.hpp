@@ -5,5 +5,6 @@
 class RemoveKDigits
 {
    public:
-    std::string removeKdigits(const std::string &num, int k);
+    // Returns the smallest possible number after removing exactly k digits.
+    std::string removeKdigits(const std::string& num, int k);
 };

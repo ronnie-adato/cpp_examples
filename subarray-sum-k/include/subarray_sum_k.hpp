@@ -5,5 +5,6 @@
 class SubarraySumK
 {
    public:
-    int subarraySum(const std::vector<int> &nums, int k);
+    // Counts contiguous subarrays whose elements sum to k.
+    int subarraySum(const std::vector<int>& nums, int k);
 };

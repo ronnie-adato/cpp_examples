@@ -4,11 +4,11 @@
 #include <ostream>
 #include <vector>
 
-std::ostream &operator<<(std::ostream &os, const std::vector<int> &v)
+std::ostream& operator<<(std::ostream& os, const std::vector<int>& v)
 {
     bool start = true;
     os << '[';
-    for (const auto &n : v)
+    for (const auto& n : v)
     {
         if (!start)
         {
@@ -24,7 +24,7 @@ std::ostream &operator<<(std::ostream &os, const std::vector<int> &v)
     return os;
 }
 
-int maxSubArray(const std::vector<int> &nums)
+int maxSubArray(const std::vector<int>& nums)
 {
     LOG(INFO) << "nums: " << nums;
     if (nums.empty())
@@ -35,6 +35,8 @@ int maxSubArray(const std::vector<int> &nums)
 
     std::vector<int> sums(nums.crbegin(), nums.crend());
 
+    // Build suffix sums in reverse order; each value represents one candidate
+    // subarray ending at the original array tail.
     int max_sum = sums.back();
     for (size_t i = sums.size() - 2; i != -1; --i)
     {
@@ -48,6 +50,8 @@ int maxSubArray(const std::vector<int> &nums)
 
     while (sums.size() > 1)
     {
+        // Remove one tail contribution at a time to expose shorter suffix
+        // candidates that end before the previous tail.
         int last = sums.back();
         sums.pop_back();
         for (auto it = sums.begin(); it != sums.end(); ++it)

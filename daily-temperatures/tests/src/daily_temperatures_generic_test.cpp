@@ -8,7 +8,7 @@
 namespace
 {
 
-std::vector<int> bruteForceExpected(const std::vector<int> &temperatures)
+std::vector<int> bruteForceExpected(const std::vector<int>& temperatures)
 {
     std::vector<int> result(temperatures.size(), 0);
     for (size_t i = 0; i < temperatures.size(); ++i)
@@ -25,7 +25,7 @@ std::vector<int> bruteForceExpected(const std::vector<int> &temperatures)
     return result;
 }
 
-void expectSolution(const std::vector<int> &temperatures, const std::vector<int> &expected)
+void expectSolution(const std::vector<int>& temperatures, const std::vector<int>& expected)
 {
     DailyTemperatures solver;
     EXPECT_EQ(solver.dailyTemperatures(temperatures), expected);

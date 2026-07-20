@@ -3,16 +3,15 @@
 
 class Message
 {
-    // Message class implementation
    public:
     Message() = default;
     virtual ~Message() = default;
+    // Gives handlers a printable dynamic message type.
     virtual std::string get_type() const = 0;
 };
 
 class Message1 : public Message
 {
-    // Message1 class implementation
    public:
     std::string get_type() const override
     {
@@ -22,7 +21,6 @@ class Message1 : public Message
 
 class Message2 : public Message
 {
-    // Message2 class implementation
    public:
     std::string get_type() const override
     {
@@ -32,7 +30,6 @@ class Message2 : public Message
 
 class Message3 : public Message
 {
-    // Message3 class implementation
    public:
     std::string get_type() const override
     {

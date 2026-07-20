@@ -3,6 +3,7 @@
 
 void Ranges::add_range(int left, int right)
 {
+    // Base implementation only records the call; concrete classes hold state.
     LOG(INFO) << "Add: [" << left << ", " << right << ")";
 }
 

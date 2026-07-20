@@ -4,7 +4,8 @@
 
 struct StartEndLogger
 {
-    StartEndLogger(RRanges &instance) : instance_(instance)
+    // Logs the interval map before and after each mutating operation.
+    StartEndLogger(RRanges& instance) : instance_(instance)
     {
         LOG(INFO) << "Start: " << instance_;
     };
@@ -14,7 +15,7 @@ struct StartEndLogger
         LOG(INFO) << "End: " << instance_;
     }
 
-    RRanges &instance_;
+    RRanges& instance_;
 };
 
 void RRanges::add_range(int left, int right)
@@ -27,6 +28,8 @@ void RRanges::add_range(int left, int right)
         return;
     }
 
+    // lower_bound finds the first stored interval whose start is not before
+    // left; any overlap with the previous interval is handled separately.
     auto it = ranges_.lower_bound(left);
     if (it == ranges_.end())
     {
@@ -45,6 +48,8 @@ void RRanges::add_range(int left, int right)
     }
     else if (it->first == left)
     {
+        // Merge every following interval that is fully covered or touches the
+        // new interval.
         while (std::next(it) != ranges_.end() && std::next(it)->second < right)
         {
             ranges_.erase(std::next(it));
@@ -104,6 +109,8 @@ void RRanges::remove_range(int left, int right)
         return;
     }
 
+    // Removal either trims an existing interval, deletes covered intervals, or
+    // splits one interval into two remaining pieces.
     auto it = ranges_.lower_bound(left);
     if (it == ranges_.end())
     {
@@ -144,6 +151,8 @@ bool RRanges::query_range(int left, int right)
         LOG(ERROR) << "Invalid range: [" << left << ", " << right << ")";
         return false;
     }
+    // A query is covered when either an exact-start interval contains it, or
+    // the previous interval spans across the requested start.
     auto it = ranges_.lower_bound(left);
     if (it == ranges_.end())
     {
@@ -161,7 +170,7 @@ bool RRanges::query_range(int left, int right)
     return false;
 }
 
-std::ostream &operator<<(std::ostream &stream, const RRanges &ranges)
+std::ostream& operator<<(std::ostream& stream, const RRanges& ranges)
 {
     stream << '{';
     bool is_first = true;

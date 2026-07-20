@@ -20,6 +20,7 @@ bool WordBreak::wordBreak(const std::string& s, const std::vector<std::string>& 
     std::unordered_set<size_t> lengths;
     lengths.reserve(wordDict.size());
     size_t maxLen = 0;
+    // Track word lengths so each dp position only checks possible slice sizes.
     for (const auto& word : wordDict)
     {
         dict.insert(word);
@@ -30,6 +31,7 @@ bool WordBreak::wordBreak(const std::string& s, const std::vector<std::string>& 
               << " maxLen=" << maxLen;
 
     std::vector<bool> dp(s.size() + 1, false);
+    // dp[i] means s[0..i) can be segmented into dictionary words.
     dp[0] = true;
 
     for (size_t i = 1; i <= s.size(); ++i)

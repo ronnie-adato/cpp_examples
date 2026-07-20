@@ -27,6 +27,8 @@ std::string RemoveKDigits::removeKdigits(const std::string& num, int k)
     std::string st;
     st.reserve(num.size());
 
+    // Keep digits in increasing order so removing a larger previous digit
+    // makes the remaining number as small as possible.
     for (const char c : num)
     {
         while (k > 0 && !st.empty() && st.back() > c)
@@ -37,6 +39,8 @@ std::string RemoveKDigits::removeKdigits(const std::string& num, int k)
         st.push_back(c);
     }
 
+    // If the digits were already monotonic, remove from the end where the
+    // positional value is lowest.
     while (k > 0 && !st.empty())
     {
         st.pop_back();

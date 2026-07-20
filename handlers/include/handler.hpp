@@ -6,18 +6,16 @@
 
 class Handler
 {
-    friend std::ostream &operator<<(std::ostream &stream, const Handler &ranges);
+    friend std::ostream& operator<<(std::ostream& stream, const Handler& ranges);
 
    public:
     Handler() = default;
     virtual ~Handler() = default;
     virtual std::string get_type() const = 0;
-    // Default Message1 handler for all Handlers
-    virtual void handle(Message1 *msg);
-    // Default Message2 handler (can be overridden)
-    virtual void handle(Message2 *msg);
-    // Default Message3 handler (can be overridden)
-    virtual void handle(Message3 *msg);
+    // Default handlers provide the fallback behavior for derived handlers.
+    virtual void handle(Message1* msg);
+    virtual void handle(Message2* msg);
+    virtual void handle(Message3* msg);
 };
 
 class Handler1 : public Handler
@@ -26,8 +24,8 @@ class Handler1 : public Handler
     Handler1() = default;
     ~Handler1() override = default;
     std::string get_type() const override;
-    // Message1 handled by base
-    void handle(Message2 *msg) override;
+    // Handler1 customizes Message2 and inherits the other fallbacks.
+    void handle(Message2* msg) override;
 };
 
 class Handler2 : public Handler
@@ -36,7 +34,7 @@ class Handler2 : public Handler
     Handler2() = default;
     ~Handler2() override = default;
     std::string get_type() const override;
-    // Message1 handled by base
-    void handle(Message2 *msg) override;
-    void handle(Message3 *msg) override;
+    // Handler2 customizes two message types and inherits Message1 handling.
+    void handle(Message2* msg) override;
+    void handle(Message3* msg) override;
 };

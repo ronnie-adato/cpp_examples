@@ -29,6 +29,8 @@ std::vector<double> EvaluateDivision::calcEquation(const std::vector<std::vector
     LOG(INFO) << "equations: " << std::endl << equations;
     LOG(INFO) << "queries: " << std::endl << queries;
 
+    // Model each equation a / b = value as two weighted directed edges:
+    // a -> b with value, and b -> a with the reciprocal.
     std::unordered_map<std::string, std::unordered_map<std::string, double>> weighted_adj_list;
     for (size_t i = 0; i < equations.size(); ++i)
     {
@@ -62,7 +64,8 @@ std::vector<double> EvaluateDivision::calcEquation(const std::vector<std::vector
         }
         else
         {
-            // bfs
+            // BFS discovers an indirect ratio by multiplying edge weights
+            // along the path from the query numerator.
             LOG(INFO) << "no direct edge; running bfs expansion from " << query.front();
             std::unordered_set<std::string> unvisited;
             for (auto [numerator, _] : weighted_adj_list)
@@ -84,6 +87,8 @@ std::vector<double> EvaluateDivision::calcEquation(const std::vector<std::vector
                     if (unvisited.find(new_denominator) != unvisited.end())
                     {
                         q.push(std::make_pair(denominator, new_denominator));
+                        // Cache the newly discovered ratio in both directions
+                        // so later queries can use it as a direct edge.
                         weighted_adj_list[query.front()][new_denominator] =
                             weighted_adj_list[query.front()][denominator] *
                             weighted_adj_list[denominator][new_denominator];
