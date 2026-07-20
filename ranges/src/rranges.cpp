@@ -31,6 +31,16 @@ void RRanges::add_range(int left, int right)
     // lower_bound finds the first stored interval whose start is not before
     // left; any overlap with the previous interval is handled separately.
     auto it = ranges_.lower_bound(left);
+    // Merge every following interval that is fully covered or touches the
+    // new interval.
+    for (; it != ranges_.end() && it->first <= right; it = ranges_.lower_bound(left))
+    {
+        if (it->second > right)
+        {
+            right = it->second;
+        }
+        ranges_.erase(it);
+    }
     if (it == ranges_.end())
     {
         if (ranges_.empty() || ranges_.rbegin()->second < left)
@@ -41,59 +51,23 @@ void RRanges::add_range(int left, int right)
         {
             ranges_.rbegin()->second = right;
         }
-        else
-        {
-            return;
-        }
-    }
-    else if (it->first == left)
-    {
-        // Merge every following interval that is fully covered or touches the
-        // new interval.
-        while (std::next(it) != ranges_.end() && std::next(it)->second < right)
-        {
-            ranges_.erase(std::next(it));
-        }
-        if (std::next(it) != ranges_.end() && std::next(it)->first < right)
-        {
-            right = std::next(it)->second;
-            ranges_.erase(std::next(it));
-        }
-        if (it->second < right)
-        {
-            it->second = right;
-        }
-        else
-        {
-            return;
-        }
     }
     else
     {
-        auto prev = std::prev(it);
         if (it != ranges_.begin())
         {
-            if (prev->second > right)
+            auto prev = std::prev(it);
+            if (left <= prev->second && prev->second <= right)
             {
-                return;
+                prev->second = right;
             }
-            if (prev->second > left)
+            else if (prev->second < left)
             {
-                left = prev->first;
-                ranges_.erase(prev);
+                ranges_[left] = right;
             }
-        }
-        if (it->first > right)
-        {
-            ranges_[left] = right;
         }
         else
         {
-            if (it->second > right)
-            {
-                right = it->second;
-            }
-            ranges_.erase(it);
             ranges_[left] = right;
         }
     }
