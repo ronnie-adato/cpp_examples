@@ -3,7 +3,7 @@
 
 #include "ng-log/logging.h"
 
-auto RSol::Clone(Node* root) -> Node*
+auto RSol::Clone(Node *root) -> Node *
 {
     if (root == nullptr)
     {
@@ -13,7 +13,7 @@ auto RSol::Clone(Node* root) -> Node*
 
     LOG(INFO) << "Original list: " << root;
 
-    Node* cloned_root = nullptr;
+    Node *cloned_root = nullptr;
 
     // Phase 1: interleave clones after originals so friend pointers can be
     // translated without an auxiliary map.
