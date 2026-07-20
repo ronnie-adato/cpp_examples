@@ -90,13 +90,11 @@ static std::string GetLogDir() {
 }
 
 GTEST_API_ int main(int argc, char **argv) {
-  // Initialize Google Test
   testing::InitGoogleTest(&argc, argv);
 
-  // Set the minimum log level
+  // Keep test output quiet while still preserving logs for failed runs.
   FLAGS_minloglevel = nglog::INFO;
 
-  // Send ng-log output to files only.
   FLAGS_log_dir = GetLogDir();
   FLAGS_logtostderr = false;
   FLAGS_alsologtostderr = false;
@@ -104,11 +102,9 @@ GTEST_API_ int main(int argc, char **argv) {
   // Avoid any stderr output from ng-log based on severity thresholds.
   FLAGS_stderrthreshold = nglog::NGLOG_FATAL + 1;
 
-  // Initialize ng-log with a custom prefix
   nglog::InstallPrefixFormatter(&MyPrefixFormatter);
   nglog::InitializeLogging(argv[0]);
 
-  // Run all tests
   return RUN_ALL_TESTS();
 }
 #endif

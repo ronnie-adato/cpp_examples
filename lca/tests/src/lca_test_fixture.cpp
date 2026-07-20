@@ -5,6 +5,8 @@ TreeNode* LeastCommonAncestorTestFixture::OwnedTree::make(int value)
 {
     nodes.emplace_back(std::make_unique<TreeNode>(value));
     TreeNode* ptr = nodes.back().get();
+    // Values are unique in the fixture tree, so tests can address nodes by
+    // value without storing every pointer separately.
     by_value[value] = ptr;
     return ptr;
 }

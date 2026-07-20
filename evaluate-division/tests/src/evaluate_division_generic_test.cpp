@@ -22,6 +22,8 @@ using Queries = std::vector<std::vector<std::string>>;
 std::optional<std::vector<double>> TrySolve(EvaluateDivision& solver, const Equations& equations,
                                             const std::vector<double>& values, const Queries& queries)
 {
+    // Older exercises sometimes signal unfinished solutions with this message;
+    // keep the generic tests skippable for that state.
     try
     {
         return solver.calcEquation(equations, values, queries);
@@ -214,6 +216,7 @@ TEST(EvaluateDivisionGenericTest, RandomizedAgainstReference)
         std::unordered_set<std::string> seen_pairs;
         auto try_add_equation = [&](const std::string& a, const std::string& b, double w)
         {
+            // Use a separator that cannot appear in generated variable names.
             const std::string& lo = (a < b) ? a : b;
             const std::string& hi = (a < b) ? b : a;
             std::string key;

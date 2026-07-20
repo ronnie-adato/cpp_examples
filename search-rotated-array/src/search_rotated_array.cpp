@@ -35,6 +35,8 @@ int SearchRotatedArray::search(const std::vector<int>& nums, int target, const s
     auto middle = std::next(left, distance / 2);
 
     int search_left = -1;
+    // A side is worth searching if it is sorted and contains the target, or if
+    // the rotation pivot lies inside that side.
     const bool take_left = (((*left <= *std::prev(middle)) && (*left <= target && target <= *std::prev(middle))) ||
                             *left > *std::prev(middle));
     if (take_left)

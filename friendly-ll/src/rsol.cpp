@@ -15,6 +15,8 @@ auto RSol::Clone(Node *root) -> Node *
 
     Node *cloned_root = nullptr;
 
+    // Phase 1: interleave clones after originals so friend pointers can be
+    // translated without an auxiliary map.
     for (Node *node = root, *cloned_node = nullptr; node != nullptr; node = cloned_node->next)
     {
         cloned_node = new Node{node->value + 10, node->next, nullptr};
@@ -26,6 +28,7 @@ auto RSol::Clone(Node *root) -> Node *
     }
     LOG(INFO) << "phase 1, Original list: " << root;
 
+    // Phase 2: original_friend->next points to the matching cloned friend.
     for (Node *node = root, *cloned_node = cloned_root; node != nullptr;
          node = cloned_node->next, cloned_node = node == nullptr ? nullptr : node->next)
     {
@@ -36,6 +39,7 @@ auto RSol::Clone(Node *root) -> Node *
     }
     LOG(INFO) << "phase 2, Original list: " << root;
 
+    // Phase 3: restore original next pointers and extract the cloned chain.
     for (Node *node = root, *cloned_node = cloned_root; node != nullptr;
          node = node->next, cloned_node = cloned_node->next)
     {

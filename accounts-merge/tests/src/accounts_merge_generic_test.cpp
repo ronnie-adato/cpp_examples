@@ -11,6 +11,7 @@ namespace
 
 std::vector<std::vector<std::string>> Normalize(std::vector<std::vector<std::string>> accounts)
 {
+    // Account order is not part of the contract, so normalize before compare.
     for (auto& account : accounts)
     {
         if (account.size() > 1)

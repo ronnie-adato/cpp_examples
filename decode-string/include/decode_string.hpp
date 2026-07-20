@@ -5,5 +5,6 @@
 class DecodeString
 {
    public:
-    std::string decodeString(const std::string &s);
+    // Decodes bracketed repeat expressions such as "3[a2[c]]".
+    std::string decodeString(const std::string& s);
 };

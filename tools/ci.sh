@@ -20,15 +20,11 @@ need_cmd() {
   command -v "$1" >/dev/null 2>&1 || die "missing required command: $1"
 }
 
-# Prefer the Ubuntu-latest package name if available (currently clang-format 18 on 24.04)
-CLANG_FORMAT_BIN="clang-format"
-if command -v clang-format-18 >/dev/null 2>&1; then
-  CLANG_FORMAT_BIN="clang-format-18"
-elif command -v clang-format >/dev/null 2>&1; then
-  CLANG_FORMAT_BIN="clang-format"
-else
-  die "clang-format not found. Install it (Ubuntu: sudo apt-get install -y clang-format)"
-fi
+# Match GitHub CI exactly. Newer clang-format releases can make different
+# pointer/reference alignment choices for the same style file.
+CLANG_FORMAT_BIN="clang-format-18"
+command -v "$CLANG_FORMAT_BIN" >/dev/null 2>&1 ||
+  die "clang-format-18 not found. Install it (Ubuntu: sudo apt-get install -y clang-format-18)"
 
 ensure_bazel() {
   if command -v bazel >/dev/null 2>&1; then

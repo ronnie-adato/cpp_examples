@@ -8,6 +8,8 @@ int Fibonacci::compute(int n)
     if (n < 0) throw std::invalid_argument("Negative arguments are not allowed.");
     if (memo.size() < n + 1)
     {
+        // Resize once per requested maximum n, keeping previously computed
+        // values available for later calls.
         memo.resize(n + 1, 0);
         if (n >= 1 && memo[1] == 0)
         {
@@ -31,6 +33,7 @@ void Fibonacci::fib_compute(int n)
     LOG(INFO) << "fib_compute(" << n << ") called";
     if (memo[n] == 0 && n > 1)
     {
+        // Computing n-1 first also fills all smaller missing entries.
         fib_compute(n - 1);
         memo[n] = memo[n - 1] + memo[n - 2];
         LOG(INFO) << "Computed memo[" << n << "] = " << memo[n];

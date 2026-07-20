@@ -27,6 +27,7 @@ std::vector<std::vector<std::string>> AccountsMerge::accountsMerge(
     const std::vector<std::vector<std::string>>& accounts)
 {
     std::vector<std::vector<size_t>> adj_list(accounts.size());
+    // Accounts that share an email belong to the same connected component.
     std::unordered_map<std::string /*email*/, size_t /*first_account*/> emails;
     for (size_t i = 0; i < accounts.size(); ++i)
     {
@@ -53,6 +54,8 @@ std::vector<std::vector<std::string>> AccountsMerge::accountsMerge(
     size_t component_count = 0;
     for (size_t i = 0; i < visited.size();)
     {
+        // BFS assigns one representative account to every node in this
+        // connected component.
         auto representor = i;
         q.push(representor);
         visited[representor] = true;
@@ -82,6 +85,7 @@ std::vector<std::vector<std::string>> AccountsMerge::accountsMerge(
 
     for (size_t i = 0; i < accounts.size(); ++i)
     {
+        // Sets keep the merged email list sorted and deduplicated.
         const auto representor = representors[i];
         auto& component = representor_to_component[representor];
         if (component == static_cast<size_t>(-1))

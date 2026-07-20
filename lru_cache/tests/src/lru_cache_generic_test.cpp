@@ -65,6 +65,7 @@ TEST(LRUCacheSingleTest, CapacityOneEviction)
 TEST(LRUCacheBigTest, LargeCapacityNoEviction)
 {
     LRUCache<int, int> big(100);
+    // Fill exactly to capacity; no key should be evicted until one more insert.
     for (int i = 0; i < 100; ++i) big.put(i, i * 10);
     for (int i = 0; i < 100; ++i) EXPECT_EQ(big.get(i), i * 10);
 }

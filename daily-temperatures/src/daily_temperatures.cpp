@@ -10,6 +10,7 @@ std::vector<int> DailyTemperatures::dailyTemperatures(const std::vector<int>& te
     std::vector<int> result(n, 0);
 
     std::stack<size_t> s;
+    // Stack indices whose temperatures have not yet found a warmer day.
     for (size_t i = 0; i < n; ++i)
     {
         while (!s.empty() && temperatures[i] > temperatures[s.top()])

@@ -55,6 +55,8 @@ unsigned largest_square(const std::vector<std::vector<int>>& matrix)
     make_binary(binary_matrix);
     std::cout << "Binary matrix:\n" << binary_matrix << std::endl;
 
+    // dp_left[i][j] is the number of consecutive non-zero cells to the right,
+    // including the current cell.
     std::vector<std::vector<int>> dp_left = binary_matrix;
     for (size_t i = 0; i < rows; ++i)
     {
@@ -68,6 +70,8 @@ unsigned largest_square(const std::vector<std::vector<int>>& matrix)
     }
     std::cout << "DP Left matrix:\n" << dp_left << std::endl;
 
+    // dp_down[i][j] is the number of consecutive non-zero cells downward,
+    // including the current cell.
     std::vector<std::vector<int>> dp_down = binary_matrix;
     for (size_t i = rows - 1; i != -1; --i)
     {
@@ -83,6 +87,8 @@ unsigned largest_square(const std::vector<std::vector<int>>& matrix)
 
     std::vector<std::vector<int>> dp = binary_matrix;
     unsigned max_square_length = 0;
+    // A square starting at (i, j) is limited by its top edge, left edge, and
+    // the largest square available diagonally down-right.
     for (size_t i = rows - 1; i != -1; --i)
     {
         for (size_t j = cols - 1; j != -1; --j)

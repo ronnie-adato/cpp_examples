@@ -5,5 +5,6 @@
 class RSol : public Solution
 {
    public:
-    Node *Clone(Node *root) override;
+    // Alternative map-free clone implementation using explicit node cursors.
+    Node* Clone(Node* root) override;
 };

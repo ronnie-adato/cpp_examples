@@ -3,6 +3,7 @@
 struct TreeNode
 {
     int val;
+    // Raw child pointers match the simple LeetCode-style tree representation.
     TreeNode* left;
     TreeNode* right;
 

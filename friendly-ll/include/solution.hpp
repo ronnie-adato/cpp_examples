@@ -5,5 +5,6 @@ struct Node;
 class Solution
 {
    public:
-    virtual Node *Clone(Node *root) = 0;
+    // Clones a linked list that contains both next and friend pointers.
+    virtual Node* Clone(Node* root) = 0;
 };

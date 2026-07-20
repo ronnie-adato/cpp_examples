@@ -12,6 +12,8 @@ std::string DecodeString::decodeString(const std::string& s)
 
     std::string decoded = "";
     using Element = std::variant<std::monostate, size_t, std::string>;
+    // The stack alternates repeat counts and partial decoded strings while
+    // nested bracket groups are being expanded.
     std::stack<Element> stack;
     Element element;
     for (auto ch : s)
@@ -49,6 +51,8 @@ std::string DecodeString::decodeString(const std::string& s)
             }
             else if (ch == ']')
             {
+                // Closing a group repeats the current fragment and appends it
+                // to the previous surrounding fragment, if one exists.
                 size_t repeat = std::get<size_t>(stack.top());
                 stack.pop();
                 std::string word = "";

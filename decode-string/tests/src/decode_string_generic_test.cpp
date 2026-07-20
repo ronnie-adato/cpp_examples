@@ -9,17 +9,18 @@
 namespace
 {
 
-std::string DecodeReferenceImpl(const std::string &s, size_t &i);
+std::string DecodeReferenceImpl(const std::string& s, size_t& i);
 
-std::string DecodeReference(const std::string &s)
+std::string DecodeReference(const std::string& s)
 {
     size_t i = 0;
     return DecodeReferenceImpl(s, i);
 }
 
-std::string DecodeReferenceImpl(const std::string &s, size_t &i)
+std::string DecodeReferenceImpl(const std::string& s, size_t& i)
 {
     std::string out;
+    // Recursive descent stops at the matching closing bracket for this level.
     while (i < s.size() && s[i] != ']')
     {
         const unsigned char uch = static_cast<unsigned char>(s[i]);
@@ -52,7 +53,7 @@ std::string DecodeReferenceImpl(const std::string &s, size_t &i)
     return out;
 }
 
-std::string RandomLetters(std::mt19937 &rng, size_t max_len)
+std::string RandomLetters(std::mt19937& rng, size_t max_len)
 {
     std::uniform_int_distribution<int> len_dist(0, static_cast<int>(max_len));
     std::uniform_int_distribution<int> char_dist(0, 25);
@@ -66,7 +67,7 @@ std::string RandomLetters(std::mt19937 &rng, size_t max_len)
     return out;
 }
 
-std::string RandomEncoded(std::mt19937 &rng, int depth, size_t max_atoms)
+std::string RandomEncoded(std::mt19937& rng, int depth, size_t max_atoms)
 {
     std::uniform_int_distribution<int> coin(0, 99);
     std::uniform_int_distribution<int> repeat_dist(1, 20);
@@ -77,6 +78,7 @@ std::string RandomEncoded(std::mt19937 &rng, int depth, size_t max_atoms)
     for (int a = 0; a < atoms; ++a)
     {
         const int roll = coin(rng);
+        // Limit depth so randomized cases stay valid and reasonably small.
         if (depth > 0 && roll < 45)
         {
             const int repeat = repeat_dist(rng);

@@ -20,6 +20,8 @@ std::ostream& operator<<(std::ostream& os, const Cell& cell)
 
 void add_to_queue(std::vector<std::vector<int>>& grid, std::queue<Cell>& q, size_t& good_oranges, const Cell& cell)
 {
+    // Mark as rotten as soon as it is queued so another neighbor cannot queue
+    // the same orange during this minute.
     grid[cell.i][cell.j] = 2;
     q.push(cell);
     --good_oranges;
@@ -54,6 +56,7 @@ int rotting_oranges_minutes(const std::vector<std::vector<int>>& grid)
     LOG(INFO) << "Initial good oranges: " << good_oranges << std::endl;
     size_t total_seconds = 0;
     std::vector<std::vector<int>> mygrid = grid;
+    // Each queue layer represents oranges that rot during the same minute.
     while (!q.empty() && good_oranges > 0)
     {
         ++total_seconds;

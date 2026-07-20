@@ -2,8 +2,10 @@
 
 #include <ostream>
 
-auto operator<<(std::ostream &os, const Node &node) -> std::ostream &
+auto operator<<(std::ostream& os, const Node& node) -> std::ostream&
 {
+    // Print friend by value to avoid recursively walking arbitrary friend
+    // cycles while still showing the next chain.
     os << "[Value: " << node.value;
     if (node.afriend)
     {
@@ -17,7 +19,7 @@ auto operator<<(std::ostream &os, const Node &node) -> std::ostream &
     return os;
 }
 
-auto operator<<(std::ostream &os, const Node *node) -> std::ostream &
+auto operator<<(std::ostream& os, const Node* node) -> std::ostream&
 {
     if (node)
     {

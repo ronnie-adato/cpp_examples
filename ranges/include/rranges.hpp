@@ -14,8 +14,9 @@ class RRanges : public Ranges
     bool query_range(int left, int right) override;
 
    private:
-    friend std::ostream &operator<<(std::ostream &stream, const RRanges &ranges);
+    friend std::ostream& operator<<(std::ostream& stream, const RRanges& ranges);
+    // Maps interval starts to interval ends.
     std::map<int, int> ranges_;
 };
 
-std::ostream &operator<<(std::ostream &stream, const RRanges &ranges);
+std::ostream& operator<<(std::ostream& stream, const RRanges& ranges);

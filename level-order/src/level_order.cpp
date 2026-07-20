@@ -17,6 +17,8 @@ auto level_order_traversal(TreeNode* root) -> std::vector<std::vector<int>>
 
     while (!q.empty())
     {
+        // Snapshot the queue size so all nodes currently queued become one
+        // output level, while their children wait for the next level.
         const std::size_t level_size = q.size();
         traversed_tree.push_back({});
         traversed_tree.back().reserve(level_size);
